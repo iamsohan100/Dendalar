@@ -1,4 +1,3 @@
-
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,7 +15,8 @@ class CustomText extends StatelessWidget {
   final TextOverflow? textOverflow;
   final double? lineHeight;
 
-
+  final bool? isKoulen;
+  final bool? isManrope;
   const CustomText({
     super.key,
     required this.text,
@@ -30,7 +30,8 @@ class CustomText extends StatelessWidget {
     this.textOverflow,
     this.letterSpacing,
     this.lineHeight,
-
+    this.isKoulen,
+    this.isManrope,
   });
 
   @override
@@ -42,7 +43,29 @@ class CustomText extends StatelessWidget {
       maxLines: maxLine,
       overflow: textOverflow ?? TextOverflow.clip,
       textAlign: (textAlign == null) ? TextAlign.start : textAlign,
-      style:  GoogleFonts.inter(
+      style: isKoulen == true
+          ? GoogleFonts.koulen(
+              decoration: textDecoration,
+              decorationColor: textDecorationColor,
+              decorationThickness: 1,
+              fontSize: scaleFactor * fontSize,
+              fontWeight: fontWeight,
+              color: color,
+              letterSpacing: letterSpacing ?? 0,
+              height: lineHeight,
+            )
+          : isManrope == true
+          ? GoogleFonts.manrope(
+              decoration: textDecoration,
+              decorationColor: textDecorationColor,
+              decorationThickness: 1,
+              fontSize: scaleFactor * fontSize,
+              fontWeight: fontWeight,
+              color: color,
+              letterSpacing: letterSpacing ?? 0,
+              height: lineHeight,
+            )
+          : GoogleFonts.inter(
               decoration: textDecoration,
               decorationColor: textDecorationColor,
               decorationThickness: 1,

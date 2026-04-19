@@ -1,4 +1,5 @@
 import 'package:dendalar/core/constants/app_colors.dart';
+import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,18 @@ class Background extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      decoration: BoxDecoration(color: AppColors.white),
-      child: SafeArea(child: Padding(padding: EdgeInsets.all(16), child: child)),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        image: DecorationImage(
+          image: AssetImage(AppImages.background),
+          fit: BoxFit.cover,
+          opacity: 0.2,
+        ),
+      ),
+
+      child: SafeArea(
+        child: Padding(padding: EdgeInsets.all(16), child: child),
+      ),
     );
   }
 }
