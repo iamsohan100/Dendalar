@@ -16,6 +16,7 @@ class PrimaryButton extends StatelessWidget {
   final Color? shadowColor;
   final double? offsetX;
   final double? offsetY;
+  final bool? isManjari;
   const PrimaryButton({
     super.key,
     this.onTap,
@@ -30,6 +31,7 @@ class PrimaryButton extends StatelessWidget {
     this.shadowColor,
     this.offsetX,
     this.offsetY,
+    this.isManjari,
   });
 
   @override
@@ -63,7 +65,8 @@ class PrimaryButton extends StatelessWidget {
           fontSize: 20,
           fontWeight: FontWeight.w400,
           color: fontColor ?? AppColors.white,
-          isKoulen: true,
+          isKoulen: isManjari == null ? true : null,
+          isManjari: isManjari,
         ),
       ),
     );

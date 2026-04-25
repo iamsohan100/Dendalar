@@ -14,9 +14,10 @@ class CustomText extends StatelessWidget {
   final Color? textDecorationColor;
   final TextOverflow? textOverflow;
   final double? lineHeight;
-
+  final bool? isManjari;
   final bool? isKoulen;
   final bool? isManrope;
+
   const CustomText({
     super.key,
     required this.text,
@@ -32,6 +33,7 @@ class CustomText extends StatelessWidget {
     this.lineHeight,
     this.isKoulen,
     this.isManrope,
+    this.isManjari,
   });
 
   @override
@@ -43,7 +45,18 @@ class CustomText extends StatelessWidget {
       maxLines: maxLine,
       overflow: textOverflow ?? TextOverflow.clip,
       textAlign: (textAlign == null) ? TextAlign.start : textAlign,
-      style: isKoulen == true
+      style: isManjari == true
+          ? GoogleFonts.manjari(
+              decoration: textDecoration,
+              decorationColor: textDecorationColor,
+              decorationThickness: 1,
+              fontSize: scaleFactor * fontSize,
+              fontWeight: fontWeight,
+              color: color,
+              letterSpacing: letterSpacing ?? 0,
+              height: lineHeight,
+            )
+          : isKoulen == true
           ? GoogleFonts.koulen(
               decoration: textDecoration,
               decorationColor: textDecorationColor,
