@@ -7,8 +7,8 @@ import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/core/utils/widgets/message_container.dart';
 import 'package:flutter/material.dart';
 
-class OnboardingPage2 extends StatelessWidget {
-  const OnboardingPage2({super.key});
+class OnboardingPage3 extends StatelessWidget {
+  const OnboardingPage3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +22,17 @@ class OnboardingPage2 extends StatelessWidget {
               Sh(h: 0.035),
               Image.asset(AppImages.logo, scale: 4),
               Sh(h: 0.15),
-              MessageContainer(msg: "Hi there I’m Borzy"),
+              MessageContainer(
+                msg: "But I’ve some questions ⁉️",
+                maxWidth: 0.5,
+                rightMargin: 0.1,
+              ),
               Sh(h: 0.01),
-              Image.asset(AppImages.onboardingPage2, scale: 4),
+              Image.asset(AppImages.onboardingPage3, scale: 4),
               Sh(h: 0.02),
               CustomText(
-                text: 'I’ll be your learnig partner throughout \nthe journey',
+                text:
+                    'Before staring our journey let’s access \nyour proficiency is Chechen',
                 color: AppColors.darkGreyishBrown,
                 fontSize: 16,
                 fontWeight: .w400,
