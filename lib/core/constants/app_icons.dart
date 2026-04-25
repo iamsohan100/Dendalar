@@ -7,4 +7,7 @@ class AppIcons {
   static const String education = '$basePath/education.png';
   static const String people = '$basePath/people.png';
   static const String onboardingPage5 = '$basePath/onboarding_5.png';
+  static const String facebook = '$basePath/facebook.png';
+  static const String instagram = '$basePath/instagram.png';
+  static const String tiktok = '$basePath/tiktok.png';
 }

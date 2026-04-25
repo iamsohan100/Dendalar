@@ -40,6 +40,8 @@ class OnboardingPage4 extends StatelessWidget {
               Sh(h: 0.05),
               ListView.separated(
                 shrinkWrap: true,
+                primary: false,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: cardsData.length,
                 itemBuilder: (context, index) {
                   final card = cardsData[index];
