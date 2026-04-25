@@ -3,4 +3,5 @@ class AppImages {
   static const String splash = '$basePath/splash_screen.png';
   static const String background = '$basePath/background.png';
   static const String logo = '$basePath/logo.png';
+  static const String onboardingPage1 = '$basePath/onboarding_page_1.png';
 }

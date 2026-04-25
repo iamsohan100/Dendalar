@@ -13,6 +13,9 @@ class PrimaryButton extends StatelessWidget {
   final double? buttonHeight;
   final Color? fontColor;
   final bool? isShadow;
+  final Color? shadowColor;
+  final double? offsetX;
+  final double? offsetY;
   const PrimaryButton({
     super.key,
     this.onTap,
@@ -24,6 +27,9 @@ class PrimaryButton extends StatelessWidget {
     this.buttonHeight,
     this.fontColor,
     this.isShadow,
+    this.shadowColor,
+    this.offsetX,
+    this.offsetY,
   });
 
   @override
@@ -36,23 +42,28 @@ class PrimaryButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width,
-        height: height * (buttonHeight ?? 0.061),
+        height: height * (buttonHeight ?? 0.055),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.primaryColor,
-          borderRadius: BorderRadius.circular(scaleFactor * (radius ?? 14)),
-          border: Border.all(
-            color: borderColor ?? AppColors.transparent,
-            width: 1,
-          ),
+          borderRadius: BorderRadius.circular(scaleFactor * (radius ?? 12)),
+          border: Border.all(color: borderColor ?? AppColors.zuccini, width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: shadowColor ?? AppColors.zuccini,
+              offset: Offset(offsetX ?? 2, offsetY ?? 3),
+              blurRadius: 0,
+            ),
+          ],
         ),
         child: CustomText(
           text: title,
           textAlign: TextAlign.center,
           textOverflow: TextOverflow.clip,
-          fontSize: 18,
+          fontSize: 20,
           fontWeight: FontWeight.w400,
           color: fontColor ?? AppColors.white,
+          isKoulen: true,
         ),
       ),
     );

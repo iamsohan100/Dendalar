@@ -10,6 +10,8 @@ class Background extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = Screen.screenHeight(context);
     final width = Screen.screenWidth(context);
+    double scaleFactor = width / Screen.designWidth;
+
     return Container(
       height: height,
       width: width,
@@ -23,7 +25,7 @@ class Background extends StatelessWidget {
       ),
 
       child: SafeArea(
-        child: Padding(padding: EdgeInsets.all(16), child: child),
+        child: Padding(padding: .all(scaleFactor * 20), child: child),
       ),
     );
   }
