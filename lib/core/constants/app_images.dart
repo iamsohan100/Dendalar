@@ -7,4 +7,5 @@ class AppImages {
   static const String onboardingPage2 = '$basePath/onboarding_page_2.png';
   static const String onboardingPage3 = '$basePath/onboarding_page_3.png';
   static const String onboardingPage4 = '$basePath/onboarding_page_4.png';
+  static const String onboardingPage5 = '$basePath/onboarding_page_5.png';
 }

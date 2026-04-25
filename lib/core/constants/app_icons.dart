@@ -6,4 +6,5 @@ class AppIcons {
   static const String career = '$basePath/career.png';
   static const String education = '$basePath/education.png';
   static const String people = '$basePath/people.png';
+  static const String onboardingPage5 = '$basePath/onboarding_5.png';
 }
