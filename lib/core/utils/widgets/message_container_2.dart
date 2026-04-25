@@ -4,18 +4,10 @@ import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:flutter/material.dart';
 
-class MessageContainer extends StatelessWidget {
-  const MessageContainer({
-    super.key,
-    required this.msg,
-    this.maxWidth,
-    this.triangleRightPadding,
-    this.rightMargin,
-  });
+class MessageContainer2 extends StatelessWidget {
+  const MessageContainer2({super.key, required this.msg, this.maxWidth});
   final String msg;
   final double? maxWidth;
-  final double? triangleRightPadding;
-  final double? rightMargin;
   @override
   Widget build(BuildContext context) {
     // double height = Screen.screenHeight(context);
@@ -30,10 +22,9 @@ class MessageContainer extends StatelessWidget {
         alignment: .center,
         children: [
           Positioned(
-            bottom: -8,
-            right: width * (triangleRightPadding ?? 0.4),
+            left: -7,
             child: Image.asset(
-              AppIcons.triangle,
+              AppIcons.triangle2,
               scale: 4,
               color: AppColors.kaitokeGreen,
             ),
@@ -43,7 +34,6 @@ class MessageContainer extends StatelessWidget {
               horizontal: scaleFactor * 14,
               vertical: scaleFactor * 10,
             ),
-            margin: EdgeInsets.only(right: width * (rightMargin ?? 0.19)),
             constraints: BoxConstraints(
               minWidth: width * 0.3,
               maxWidth: width * (maxWidth ?? 0.4),
