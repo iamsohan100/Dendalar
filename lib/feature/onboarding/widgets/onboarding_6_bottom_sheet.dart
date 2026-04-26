@@ -25,6 +25,8 @@ void onboarding6BottomSheet(BuildContext context) {
     isScrollControlled: true,
     barrierColor: Colors.transparent,
     elevation: 0,
+    isDismissible: false,
+    enableDrag: false,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topRight: Radius.circular(scaleFactor * 32),

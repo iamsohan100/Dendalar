@@ -45,7 +45,7 @@ class _OnboardingPage5State extends State<OnboardingPage5> {
               Sh(h: 0.035),
               Image.asset(AppImages.logo, scale: 4),
 
-              Sh(h: 0.2),
+              Sh(h: 0.14),
               Row(
                 mainAxisAlignment: .center,
                 children: [

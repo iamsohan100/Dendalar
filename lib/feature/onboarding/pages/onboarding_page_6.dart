@@ -33,8 +33,8 @@ class _OnboardingPage6State extends State<OnboardingPage6> {
               Sh(h: 0.035),
               Image.asset(AppImages.logoWhite, scale: 4),
 
-              Sh(h: 0.05),
-              Image.asset(AppImages.onbaording6, scale: 4),
+              Sh(h: 0.02),
+              Image.asset(AppImages.onbaording6, scale: 5),
             ],
           ),
         ),

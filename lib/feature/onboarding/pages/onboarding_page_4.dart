@@ -5,6 +5,7 @@ import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/onboarding/widgets/board_4_message.dart';
+import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_card.dart';
 import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,25 @@ class OnboardingPage4 extends StatelessWidget {
     ];
     final selectedIndex = (-1).obs;
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: OnboardingButtons(
+        children: [
+          PrimaryButton(
+            onTap: () => Get.toNamed(AppRoutes.onboardingPage5),
+            title: 'Continue',
+          ),
+          Sh(h: 0.01),
+          PrimaryButton(
+            onTap: () => Navigator.pop(context),
+            title: 'Back',
+            fontColor: AppColors.blackout,
+            backgroundColor: AppColors.transparent,
+            borderColor: AppColors.transparent,
+            shadowColor: AppColors.transparent,
+            isManjari: true,
+          ),
+        ],
+      ),
       body: Background(
         child: SingleChildScrollView(
           child: Column(
@@ -61,20 +81,6 @@ class OnboardingPage4 extends StatelessWidget {
                 },
               ),
               Sh(h: 0.2),
-              PrimaryButton(
-                onTap: () => Get.toNamed(AppRoutes.onboardingPage5),
-                title: 'Continue',
-              ),
-              Sh(h: 0.01),
-              PrimaryButton(
-                onTap: () => Navigator.pop(context),
-                title: 'Back',
-                fontColor: AppColors.blackout,
-                backgroundColor: AppColors.transparent,
-                borderColor: AppColors.transparent,
-                shadowColor: AppColors.transparent,
-                isManjari: true,
-              ),
             ],
           ),
         ),
