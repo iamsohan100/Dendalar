@@ -8,4 +8,5 @@ class AppRoutes {
   static const onboardingPage6 = '/onboardingPage6';
   static const createProfilePage = '/createProfilePage';
   static const agePage = '/agePage';
+  static const namePage = '/namePage';
 }
