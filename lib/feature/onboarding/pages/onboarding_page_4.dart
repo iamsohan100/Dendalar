@@ -56,7 +56,10 @@ class OnboardingPage4 extends StatelessWidget {
               Sh(h: 0.035),
               Image.asset(AppImages.logo, scale: 4),
               Sh(h: 0.045),
-              Board4Message(),
+              Board4Message(
+                msg: "Why do you want to learn Chechen language?",
+                messageMaxWidth: 0.65,
+              ),
               Sh(h: 0.05),
               ListView.separated(
                 shrinkWrap: true,

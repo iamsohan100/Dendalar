@@ -6,8 +6,9 @@ import 'package:dendalar/core/utils/widgets/message_container_2.dart';
 import 'package:flutter/material.dart';
 
 class Board4Message extends StatelessWidget {
-  const Board4Message({super.key});
-
+  const Board4Message({super.key, required this.msg,required this.messageMaxWidth});
+  final String msg;
+  final double messageMaxWidth;
   @override
   Widget build(BuildContext context) {
     // double height = Screen.screenHeight(context);
@@ -32,10 +33,7 @@ class Board4Message extends StatelessWidget {
             ),
           ),
           Sw(w: 0.035),
-          MessageContainer2(
-            msg: "Why do you want to learn Chechen language?",
-            maxWidth: 0.65,
-          ),
+          MessageContainer2(msg: msg, maxWidth:messageMaxWidth),
         ],
       ),
     );
