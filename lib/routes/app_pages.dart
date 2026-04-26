@@ -4,6 +4,7 @@ import 'package:dendalar/feature/onboarding/pages/onboarding_page_3.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_4.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_5.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_6.dart';
+import 'package:dendalar/feature/registration/pages/create_profile_page.dart';
 import 'package:dendalar/feature/splash/pages/splash_page.dart';
 import 'package:dendalar/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -43,6 +44,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.onboardingPage6,
       page: () => const OnboardingPage6(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.createProfilePage,
+      page: () => const CreateProfilePage(),
       transition: Transition.fadeIn,
     ),
   ];

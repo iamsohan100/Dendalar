@@ -56,7 +56,7 @@ class OnboardingPage1 extends StatelessWidget {
                 isManrope: true,
                 textAlign: TextAlign.center,
               ),
-              Sh(h: 0.2),
+              Sh(h: 0.1),
             ],
           ),
         ),

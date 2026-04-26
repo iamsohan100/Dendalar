@@ -80,7 +80,7 @@ class OnboardingPage4 extends StatelessWidget {
                   return Sh(h: 0.016);
                 },
               ),
-              Sh(h: 0.2),
+              Sh(h: 0.1),
             ],
           ),
         ),

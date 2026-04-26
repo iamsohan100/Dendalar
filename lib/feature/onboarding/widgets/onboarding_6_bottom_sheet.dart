@@ -6,6 +6,7 @@ import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/feature/onboarding/controllers/onboarding_6_controller.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_card.dart';
+import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -89,7 +90,10 @@ void onboarding6BottomSheet(BuildContext context) {
                   ),
                   Sh(h: 0.03),
 
-                  PrimaryButton(title: 'Continue'),
+                  PrimaryButton(
+                    onTap: () => Get.toNamed(AppRoutes.createProfilePage),
+                    title: 'Continue',
+                  ),
                   Sh(h: 0.01),
                   PrimaryButton(
                     onTap: () {

@@ -73,6 +73,7 @@ class _OnboardingPage5State extends State<OnboardingPage5> {
                 isManrope: true,
                 textAlign: TextAlign.center,
               ),
+              Sh(h: 0.1),
             ],
           ),
         ),

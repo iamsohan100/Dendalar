@@ -4,14 +4,11 @@ import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
-import 'package:dendalar/core/utils/widgets/message_container.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
-import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class OnboardingPage2 extends StatelessWidget {
-  const OnboardingPage2({super.key});
+class CreateProfilePage extends StatelessWidget {
+  const CreateProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +16,10 @@ class OnboardingPage2 extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: OnboardingButtons(
         children: [
-          PrimaryButton(
-            onTap: () => Get.toNamed(AppRoutes.onboardingPage3),
-            title: 'Continue',
-          ),
+          PrimaryButton(title: 'CREATE PROFILE'),
           Sh(h: 0.01),
           PrimaryButton(
-            onTap: () => Navigator.pop(context),
-            title: 'Back',
+            title: 'Skip',
             fontColor: AppColors.blackout,
             backgroundColor: AppColors.transparent,
             borderColor: AppColors.transparent,
@@ -44,19 +37,19 @@ class OnboardingPage2 extends StatelessWidget {
               Sh(h: 0.035),
               Image.asset(AppImages.logo, scale: 4),
               Sh(h: 0.1),
-              MessageContainer(msg: "Hi there I’m Borzy"),
-              Sh(h: 0.01),
-              Image.asset(AppImages.onboardingPage2, scale: 4),
+
+              Image.asset(AppImages.createProfile, scale: 4),
               Sh(h: 0.02),
               CustomText(
-                text: 'I’ll be your learnig partner throughout \nthe journey',
+                text:
+                    'Let’s create your profile with personal details \nfor a more customized experience',
                 color: AppColors.darkGreyishBrown,
                 fontSize: 16,
                 fontWeight: .w400,
                 isManrope: true,
                 textAlign: TextAlign.center,
               ),
-              Sh(h: 0.1),
+              Sh(h: 0.2),
             ],
           ),
         ),
