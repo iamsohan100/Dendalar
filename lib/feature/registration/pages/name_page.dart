@@ -9,7 +9,9 @@ import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/onboarding/widgets/board_4_message.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
+import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NamePage extends StatelessWidget {
   const NamePage({super.key});
@@ -24,7 +26,10 @@ class NamePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: OnboardingButtons(
         children: [
-          PrimaryButton(title: 'NEXT'),
+          PrimaryButton(
+            onTap: () => Get.toNamed(AppRoutes.emailPage),
+            title: 'NEXT',
+          ),
           Sh(h: 0.02),
           Row(
             spacing: width * 0.03,

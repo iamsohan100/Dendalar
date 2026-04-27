@@ -1,4 +1,4 @@
-import 'package:dendalar/core/constants/app_colors.dart';
+import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/form_field/custom_form_field.dart';
@@ -6,12 +6,10 @@ import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/onboarding/widgets/board_4_message.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
-import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class AgePage extends StatelessWidget {
-  const AgePage({super.key});
+class EmailPage extends StatelessWidget {
+  const EmailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +21,8 @@ class AgePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: OnboardingButtons(
         children: [
-          PrimaryButton(
-            onTap: () => Get.toNamed(AppRoutes.namePage),
-            title: 'NEXT',
-          ),
+          PrimaryButton(title: 'NEXT'),
           Sh(h: 0.01),
-          PrimaryButton(
-            onTap: () => Get.toNamed(AppRoutes.namePage),
-            title: 'Skip',
-            fontColor: AppColors.blackout,
-            backgroundColor: AppColors.transparent,
-            borderColor: AppColors.transparent,
-            shadowColor: AppColors.transparent,
-            isManjari: true,
-          ),
         ],
       ),
       body: Background(
@@ -49,11 +35,14 @@ class AgePage extends StatelessWidget {
               Image.asset(AppImages.logo, scale: 4),
               Sh(h: 0.045),
               Board4Message(
-                msg: "How old are you buddy?",
-                messageMaxWidth: 0.5,
+                msg: "What’s your email address?",
+                messageMaxWidth: 0.55,
               ),
               Sh(h: 0.05),
-              CustomFormField(hintText: 'Enter your age'),
+              CustomFormField(
+                hintText: 'Enter email address',
+                prefixIcon: Image.asset(AppIcons.email, scale: 3),
+              ),
 
               Sh(h: 0.2),
             ],
