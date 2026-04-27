@@ -17,6 +17,7 @@ class PrimaryButton extends StatelessWidget {
   final double? offsetX;
   final double? offsetY;
   final bool? isManjari;
+  final double? fontSize;
   const PrimaryButton({
     super.key,
     this.onTap,
@@ -32,6 +33,7 @@ class PrimaryButton extends StatelessWidget {
     this.offsetX,
     this.offsetY,
     this.isManjari,
+    this.fontSize,
   });
 
   @override
@@ -58,16 +60,35 @@ class PrimaryButton extends StatelessWidget {
             ),
           ],
         ),
-        child: CustomText(
-          text: title,
-          textAlign: TextAlign.center,
-          textOverflow: TextOverflow.clip,
-          fontSize: 20,
-          fontWeight: FontWeight.w400,
-          color: fontColor ?? AppColors.white,
-          isKoulen: isManjari == null ? true : null,
-          isManjari: isManjari,
-        ),
+        child: icon != null
+            ? Row(
+                spacing: width * 0.02,
+                mainAxisAlignment: .center,
+                crossAxisAlignment: .center,
+                children: [
+                  icon!,
+                  CustomText(
+                    text: title,
+                    textAlign: TextAlign.center,
+                    textOverflow: TextOverflow.clip,
+                    fontSize: fontSize ?? 20,
+                    fontWeight: FontWeight.w400,
+                    color: fontColor ?? AppColors.white,
+                    isKoulen: isManjari == null ? true : null,
+                    isManjari: isManjari,
+                  ),
+                ],
+              )
+            : CustomText(
+                text: title,
+                textAlign: TextAlign.center,
+                textOverflow: TextOverflow.clip,
+                fontSize: fontSize ?? 20,
+                fontWeight: FontWeight.w400,
+                color: fontColor ?? AppColors.white,
+                isKoulen: isManjari == null ? true : null,
+                isManjari: isManjari,
+              ),
       ),
     );
   }

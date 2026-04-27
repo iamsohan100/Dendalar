@@ -10,4 +10,5 @@ class AppIcons {
   static const String facebook = '$basePath/facebook.png';
   static const String instagram = '$basePath/instagram.png';
   static const String tiktok = '$basePath/tiktok.png';
+  static const String google = '$basePath/google.png';
 }

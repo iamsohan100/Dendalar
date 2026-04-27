@@ -1,8 +1,11 @@
 import 'package:dendalar/core/constants/app_colors.dart';
+import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/form_field/custom_form_field.dart';
+import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
+import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/onboarding/widgets/board_4_message.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
@@ -14,7 +17,7 @@ class NamePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // double height = Screen.screenHeight(context);
-    // double width = Screen.screenWidth(context);
+    double width = Screen.screenWidth(context);
     // double scaleFactor = width / Screen.designWidth;
 
     return Scaffold(
@@ -22,15 +25,39 @@ class NamePage extends StatelessWidget {
       floatingActionButton: OnboardingButtons(
         children: [
           PrimaryButton(title: 'NEXT'),
-          Sh(h: 0.01),
+          Sh(h: 0.02),
+          Row(
+            spacing: width * 0.03,
+            mainAxisAlignment: .center,
+            children: [
+              SizedBox(
+                width: width * 0.15,
+                child: Divider(color: AppColors.chalice),
+              ),
+              CustomText(
+                text: 'or sign up with',
+                color: AppColors.darkGreyishBrown,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+
+              SizedBox(
+                width: width * 0.15,
+                child: Divider(color: AppColors.chalice),
+              ),
+            ],
+          ),
+          Sh(h: 0.02),
+
           PrimaryButton(
-            onTap: () => Navigator.pop(context),
-            title: 'Skip',
-            fontColor: AppColors.blackout,
-            backgroundColor: AppColors.transparent,
-            borderColor: AppColors.transparent,
-            shadowColor: AppColors.transparent,
+            title: 'Sign up using Google',
+            icon: Image.asset(AppIcons.google, scale: 4),
+            backgroundColor: AppColors.white,
+            borderColor: AppColors.chalice,
+            shadowColor: AppColors.chalice,
+            fontColor: AppColors.blackGrape,
             isManjari: true,
+            fontSize: 14,
           ),
         ],
       ),

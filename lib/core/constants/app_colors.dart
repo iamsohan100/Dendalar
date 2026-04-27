@@ -13,4 +13,5 @@ class AppColors {
   static const Color chalice = Color(0xFFADADAD);
   static const Color grayHint = Color(0xFFE5E5E5);
   static const Color muslimGreen = Color(0xFF03AE56);
+  static const Color blackGrape = Color(0xFF191D23);
 }
