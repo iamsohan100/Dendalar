@@ -8,7 +8,9 @@ import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/login/widgets/dont_have_account.dart';
+import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -49,12 +51,17 @@ class LoginPage extends StatelessWidget {
               Sh(h: 0.015),
               Align(
                 alignment: .topRight,
-                child: CustomText(
-                  text: 'Forgot Password',
-                  fontSize: 14,
-                  color: AppColors.blazeRed,
-                  fontWeight: .w600,
-                  isManjari: true,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.forgetPasswordPage);
+                  },
+                  child: CustomText(
+                    text: 'Forgot Password',
+                    fontSize: 14,
+                    color: AppColors.blazeRed,
+                    fontWeight: .w600,
+                    isManjari: true,
+                  ),
                 ),
               ),
               Sh(h: 0.025),
