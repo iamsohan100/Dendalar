@@ -11,4 +11,5 @@ class AppRoutes {
   static const namePage = '/namePage';
   static const emailPage = '/emailPage';
   static const completeProfilePage = '/completeProfilePage';
+  static const congratulationPage = '/congratulationPage';
 }

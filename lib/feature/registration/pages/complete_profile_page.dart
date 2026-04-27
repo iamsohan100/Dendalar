@@ -6,7 +6,9 @@ import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/onboarding/widgets/board_4_message.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
+import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CompleteProfilePage extends StatelessWidget {
   const CompleteProfilePage({super.key});
@@ -21,7 +23,11 @@ class CompleteProfilePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: OnboardingButtons(
         children: [
-          PrimaryButton(title: 'Complete Profile'),
+          PrimaryButton(
+            onTap: () {
+              Get.toNamed(AppRoutes.congratulationPage);
+            },
+            title: 'Complete Profile'),
           Sh(h: 0.01),
         ],
       ),
