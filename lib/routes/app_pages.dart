@@ -1,5 +1,6 @@
 import 'package:dendalar/feature/login/pages/forget_password_page.dart';
 import 'package:dendalar/feature/login/pages/login_page.dart';
+import 'package:dendalar/feature/login/pages/verify_email_page.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_1.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_2.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_3.dart';
@@ -92,6 +93,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.forgetPasswordPage,
       page: () => const ForgetPasswordPage(),
+      transition: Transition.fadeIn,
+    ),
+
+     GetPage(
+      name: AppRoutes.verifyEmailPage,
+      page: () => const VerifyEmailPage(),
       transition: Transition.fadeIn,
     ),
   ];

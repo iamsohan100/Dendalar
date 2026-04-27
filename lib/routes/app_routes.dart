@@ -14,4 +14,5 @@ class AppRoutes {
   static const congratulationPage = '/congratulationPage';
   static const loginPage = '/loginPage';
   static const forgetPasswordPage = '/forgetPasswordPage';
+  static const verifyEmailPage = '/verifyEmailPage';
 }
