@@ -13,4 +13,5 @@ class AppImages {
   static const String onbaording6 = '$basePath/onboarding_6.png';
   static const String createProfile = '$basePath/create_profile.png';
   static const String congratulation = '$basePath/congratulation.png';
+  static const String login = '$basePath/login.png';
 }

@@ -26,6 +26,7 @@ class OnboardingPage1 extends StatelessWidget {
           ),
           Sh(h: 0.02),
           PrimaryButton(
+            onTap: () => Get.offAllNamed(AppRoutes.loginPage),
             title: 'I already have an account',
             fontColor: AppColors.blackout,
             backgroundColor: AppColors.white,

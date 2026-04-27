@@ -6,7 +6,9 @@ import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/core/utils/widgets/message_container.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
+import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CongratulationPage extends StatelessWidget {
   const CongratulationPage({super.key});
@@ -17,7 +19,10 @@ class CongratulationPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: OnboardingButtons(
         children: [
-          PrimaryButton(onTap: () {}, title: 'Continue'),
+          PrimaryButton(
+            onTap: () => Get.offAllNamed(AppRoutes.loginPage),
+            title: 'Continue',
+          ),
           Sh(h: 0.01),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:dendalar/feature/login/pages/login_page.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_1.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_2.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_3.dart';
@@ -79,6 +80,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.congratulationPage,
       page: () => const CongratulationPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.loginPage,
+      page: () => const LoginPage(),
       transition: Transition.fadeIn,
     ),
   ];
