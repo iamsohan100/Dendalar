@@ -5,6 +5,7 @@ import 'package:dendalar/feature/onboarding/pages/onboarding_page_4.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_5.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_6.dart';
 import 'package:dendalar/feature/registration/pages/age_page.dart';
+import 'package:dendalar/feature/registration/pages/complete_profile_page.dart';
 import 'package:dendalar/feature/registration/pages/create_profile_page.dart';
 import 'package:dendalar/feature/registration/pages/email_page.dart';
 import 'package:dendalar/feature/registration/pages/name_page.dart';
@@ -67,6 +68,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.emailPage,
       page: () => const EmailPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.completeProfilePage,
+      page: () => const CompleteProfilePage(),
       transition: Transition.fadeIn,
     ),
   ];

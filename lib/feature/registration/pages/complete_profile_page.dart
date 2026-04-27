@@ -6,12 +6,10 @@ import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/onboarding/widgets/board_4_message.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
-import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class EmailPage extends StatelessWidget {
-  const EmailPage({super.key});
+class CompleteProfilePage extends StatelessWidget {
+  const CompleteProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +21,7 @@ class EmailPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: OnboardingButtons(
         children: [
-          PrimaryButton(
-            onTap: () {
-              Get.toNamed(AppRoutes.completeProfilePage);
-            },
-            title: 'NEXT',
-          ),
+          PrimaryButton(title: 'Complete Profile'),
           Sh(h: 0.01),
         ],
       ),
@@ -42,13 +35,18 @@ class EmailPage extends StatelessWidget {
               Image.asset(AppImages.logo, scale: 4),
               Sh(h: 0.045),
               Board4Message(
-                msg: "What’s your email address?",
-                messageMaxWidth: 0.55,
+                msg: "Let’s complete the final step. Set password",
+                messageMaxWidth: 0.6,
               ),
               Sh(h: 0.05),
               CustomFormField(
-                hintText: 'Enter email address',
-                prefixIcon: Image.asset(AppIcons.email, scale: 3),
+                hintText: 'Enter new password',
+                prefixIcon: Image.asset(AppIcons.pass, scale: 3),
+              ),
+              Sh(h: 0.02),
+              CustomFormField(
+                hintText: 'Confirm new password',
+                prefixIcon: Image.asset(AppIcons.pass, scale: 3),
               ),
 
               Sh(h: 0.2),
