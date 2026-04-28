@@ -26,7 +26,15 @@ class Background extends StatelessWidget {
       ),
 
       child: SafeArea(
-        child: Padding(padding: .all(scaleFactor * 20), child: child),
+        child: Padding(
+          padding: .only(
+            left: scaleFactor * 20,
+            right: scaleFactor * 20,
+            top: scaleFactor * 16,
+            bottom: scaleFactor * 20,
+          ),
+          child: child,
+        ),
       ),
     );
   }

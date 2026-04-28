@@ -24,6 +24,9 @@ class _OtpFieldState extends State<OtpField> {
       child: SizedBox(
         width: width,
         child: PinCodeTextField(
+          obscureText: true,
+          obscuringCharacter: '*',
+
           controller: otpTEController,
           appContext: context,
           pastedTextStyle: TextStyle(
@@ -33,8 +36,8 @@ class _OtpFieldState extends State<OtpField> {
           length: 6,
           textStyle: GoogleFonts.poppins(
             color: AppColors.muslimGreen,
-            fontWeight: .w400,
-            fontSize: scaleFactor * 14,
+            fontWeight: .w700,
+            fontSize: scaleFactor * 16,
           ),
           animationType: AnimationType.fade,
 

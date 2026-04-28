@@ -22,6 +22,15 @@ class Dendalar extends StatelessWidget {
       getPages: AppPages.routes,
       theme: AppTheme.lightTheme,
       initialBinding: InitDependencyBinding(),
+      builder: (context, child) {
+        return GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: child!,
+        );
+      },
     );
   }
 }

@@ -17,6 +17,7 @@ class CustomText extends StatelessWidget {
   final bool? isManjari;
   final bool? isKoulen;
   final bool? isManrope;
+  final bool? isPoppins;
 
   const CustomText({
     super.key,
@@ -34,6 +35,7 @@ class CustomText extends StatelessWidget {
     this.isKoulen,
     this.isManrope,
     this.isManjari,
+    this.isPoppins,
   });
 
   @override
@@ -45,7 +47,18 @@ class CustomText extends StatelessWidget {
       maxLines: maxLine,
       overflow: textOverflow ?? TextOverflow.clip,
       textAlign: (textAlign == null) ? TextAlign.start : textAlign,
-      style: isManjari == true
+      style: isPoppins == true
+          ? GoogleFonts.poppins(
+              decoration: textDecoration,
+              decorationColor: textDecorationColor,
+              decorationThickness: 1,
+              fontSize: scaleFactor * fontSize,
+              fontWeight: fontWeight,
+              color: color,
+              letterSpacing: letterSpacing ?? 0,
+              height: lineHeight,
+            )
+          : isManjari == true
           ? GoogleFonts.manjari(
               decoration: textDecoration,
               decorationColor: textDecorationColor,
