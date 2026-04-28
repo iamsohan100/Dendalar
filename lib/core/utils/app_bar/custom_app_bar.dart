@@ -4,8 +4,8 @@ import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
-
+  const CustomAppBar({super.key, this.isMain});
+  final bool? isMain;
   @override
   Widget build(BuildContext context) {
     final width = Screen.screenWidth(context);
@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget {
           Image.asset(AppImages.logo, scale: 5),
 
           Spacer(),
-          NavigationBack(),
+          NavigationBack(isMain: isMain),
         ],
       ),
     );

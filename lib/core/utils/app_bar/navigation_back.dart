@@ -3,10 +3,13 @@ import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
+import 'package:dendalar/feature/dashboard/controller/dashboard_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NavigationBack extends StatelessWidget {
-  const NavigationBack({super.key});
+  const NavigationBack({super.key, this.isMain});
+  final bool? isMain;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,13 @@ class NavigationBack extends StatelessWidget {
     final scaleFactor = width / Screen.designWidth;
     // final height = Screen.screenHeight(context);
     return GestureDetector(
-      onTap: () => Navigator.pop(context),
+      onTap: () {
+        if (isMain == true) {
+          Get.find<DashboardController>().changeIndex(index: 0);
+        } else {
+          Navigator.pop(context);
+        }
+      },
       child: Container(
         padding: EdgeInsets.all(scaleFactor * 2),
         decoration: BoxDecoration(color: AppColors.transparent, shape: .circle),
