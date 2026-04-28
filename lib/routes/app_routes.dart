@@ -15,4 +15,5 @@ class AppRoutes {
   static const loginPage = '/loginPage';
   static const forgetPasswordPage = '/forgetPasswordPage';
   static const verifyEmailPage = '/verifyEmailPage';
+  static const setNewPassPage = '/setNewPassPage';
 }

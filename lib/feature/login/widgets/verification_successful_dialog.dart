@@ -12,7 +12,7 @@ dynamic verificationSuccessfulDialog(BuildContext context) {
   double scaleFactor = width / Screen.designWidth;
 
   Future.delayed(const Duration(seconds: 1), () {
-    Get.offNamed(AppRoutes.loginPage);
+    Get.offNamed(AppRoutes.setNewPassPage);
   });
 
   return showDialog(
