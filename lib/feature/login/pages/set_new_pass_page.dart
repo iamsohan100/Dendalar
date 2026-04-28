@@ -6,6 +6,7 @@ import 'package:dendalar/core/utils/form_field/custom_form_field.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
+import 'package:dendalar/feature/login/widgets/pass_saved_dialog.dart';
 import 'package:flutter/material.dart';
 
 class SetNewPassPage extends StatelessWidget {
@@ -44,7 +45,12 @@ class SetNewPassPage extends StatelessWidget {
                 prefixIcon: Image.asset(AppIcons.pass, scale: 3),
               ),
               Sh(h: 0.07),
-              PrimaryButton(title: 'SAVE CHANGES'),
+              PrimaryButton(
+                onTap: () {
+                  passSavedDialog(context);
+                },
+                title: 'SAVE CHANGES',
+              ),
               Sh(h: 0.01),
               PrimaryButton(
                 onTap: () => Navigator.pop(context),

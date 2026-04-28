@@ -7,7 +7,7 @@ import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-dynamic verificationSuccessfulDialog(BuildContext context) {
+dynamic passSavedDialog(BuildContext context) {
   double width = Screen.screenWidth(context);
   double scaleFactor = width / Screen.designWidth;
 
@@ -15,7 +15,7 @@ dynamic verificationSuccessfulDialog(BuildContext context) {
     if (context.mounted) {
       Navigator.pop(context);
     }
-    Get.offNamed(AppRoutes.setNewPassPage);
+    Get.offAllNamed(AppRoutes.loginPage);
   });
 
   return showDialog(
@@ -39,10 +39,10 @@ dynamic verificationSuccessfulDialog(BuildContext context) {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(AppImages.verify, width: scaleFactor * 125),
+                Image.asset(AppImages.login, width: scaleFactor * 125),
                 Sh(h: 0.008),
                 CustomText(
-                  text: 'Verification Successful',
+                  text: 'Password Saved',
                   color: AppColors.blackout,
                   fontSize: 14,
                   fontWeight: .w700,
