@@ -16,4 +16,5 @@ class AppColors {
   static const Color blackGrape = Color(0xFF191D23);
   static const Color blazeRed = Color(0xFFF44336);
   static const Color sportyWhite = Color(0xFFEFF0F6);
+  static const Color darkSilver = Color(0xFFAFAFAF);
 }

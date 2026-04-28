@@ -17,5 +17,5 @@ class AppImages {
   static const String forget = '$basePath/forget.png';
   static const String verify = '$basePath/verify.png';
   static const String setPass = '$basePath/set_pass.png';
-
+  static const String level = '$basePath/level.png';
 }
