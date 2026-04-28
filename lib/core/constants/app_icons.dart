@@ -18,4 +18,6 @@ class AppIcons {
   static const String vocabulary = '$basePath/vocabulary.png';
   static const String books = '$basePath/books.png';
   static const String profile = '$basePath/profile.png';
+  static const String username = '$basePath/username.png';
+  static const String edit = '$basePath/edit.png';
 }

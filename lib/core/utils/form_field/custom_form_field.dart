@@ -69,8 +69,9 @@ class _CustomFormField extends State<CustomFormField> {
           CustomText(
             text: widget.title!,
             color: widget.titleColor ?? AppColors.black,
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.w500,
+            isManjari: true,
           ),
           Sh(h: 0.01),
         ],
@@ -111,7 +112,7 @@ class _CustomFormField extends State<CustomFormField> {
           style: GoogleFonts.manjari(
             fontSize: scaleFactor * 14,
             fontWeight: FontWeight.w400,
-            color: AppColors.darkGreyishBrown,
+            color: AppColors.blackout,
           ),
 
           obscureText: widget.isPassword && obSecure,

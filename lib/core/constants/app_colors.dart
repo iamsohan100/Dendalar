@@ -15,4 +15,5 @@ class AppColors {
   static const Color muslimGreen = Color(0xFF03AE56);
   static const Color blackGrape = Color(0xFF191D23);
   static const Color blazeRed = Color(0xFFF44336);
+  static const Color sportyWhite = Color(0xFFEFF0F6);
 }

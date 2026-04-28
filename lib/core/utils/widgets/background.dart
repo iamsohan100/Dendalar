@@ -4,9 +4,15 @@ import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:flutter/material.dart';
 
 class Background extends StatelessWidget {
-  const Background({super.key, required this.child, this.backgroundImage});
+  const Background({
+    super.key,
+    required this.child,
+    this.backgroundImage,
+    this.isPaddingZero,
+  });
   final Widget child;
   final String? backgroundImage;
+  final bool? isPaddingZero;
   @override
   Widget build(BuildContext context) {
     final height = Screen.screenHeight(context);
@@ -27,12 +33,14 @@ class Background extends StatelessWidget {
 
       child: SafeArea(
         child: Padding(
-          padding: .only(
-            left: scaleFactor * 20,
-            right: scaleFactor * 20,
-            top: scaleFactor * 16,
-            bottom: scaleFactor * 20,
-          ),
+          padding: isPaddingZero == true
+              ? .zero
+              : .only(
+                  left: scaleFactor * 20,
+                  right: scaleFactor * 20,
+                  top: scaleFactor * 16,
+                  bottom: scaleFactor * 20,
+                ),
           child: child,
         ),
       ),
