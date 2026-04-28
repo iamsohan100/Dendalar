@@ -65,7 +65,12 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Sh(h: 0.025),
-              PrimaryButton(title: 'LOGIN'),
+              PrimaryButton(
+                onTap: () {
+                  Get.toNamed(AppRoutes.dashboardPage);
+                },
+                title: 'LOGIN',
+              ),
               Sh(h: 0.035),
               DontHaveAccount(),
               Sh(h: 0.035),

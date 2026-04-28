@@ -14,4 +14,8 @@ class AppIcons {
   static const String email = '$basePath/email.png';
   static const String pass = '$basePath/pass.png';
   static const String arrowBack = '$basePath/arrow_back.png';
+  static const String mainCourse = '$basePath/main_course.png';
+  static const String vocabulary = '$basePath/vocabulary.png';
+  static const String books = '$basePath/books.png';
+  static const String profile = '$basePath/profile.png';
 }

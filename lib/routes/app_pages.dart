@@ -1,3 +1,4 @@
+import 'package:dendalar/feature/dashboard/pages/dashboard_page.dart';
 import 'package:dendalar/feature/login/pages/forget_password_page.dart';
 import 'package:dendalar/feature/login/pages/login_page.dart';
 import 'package:dendalar/feature/login/pages/set_new_pass_page.dart';
@@ -23,6 +24,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.splashPage,
       page: () => const SplashPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.dashboardPage,
+      page: () => const DashboardPage(),
       transition: Transition.fadeIn,
     ),
     GetPage(

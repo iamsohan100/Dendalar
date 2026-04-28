@@ -8,6 +8,6 @@ class AppTheme {
       seedColor: Colors.white,
       primary: AppColors.primaryColor,
     ),
-    scaffoldBackgroundColor: AppColors.primaryColor,
+    scaffoldBackgroundColor: AppColors.white,
   );
 }
