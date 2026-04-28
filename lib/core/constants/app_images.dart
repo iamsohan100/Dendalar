@@ -15,4 +15,6 @@ class AppImages {
   static const String congratulation = '$basePath/congratulation.png';
   static const String login = '$basePath/login.png';
   static const String forget = '$basePath/forget.png';
+  static const String verify = '$basePath/verify.png';
+
 }

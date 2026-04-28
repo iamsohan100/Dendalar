@@ -6,6 +6,7 @@ import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/login/widgets/otp_field.dart';
 import 'package:dendalar/feature/login/widgets/resend_otp.dart';
+import 'package:dendalar/feature/login/widgets/verification_successful_dialog.dart';
 import 'package:flutter/material.dart';
 
 class VerifyEmailPage extends StatelessWidget {
@@ -48,7 +49,12 @@ class VerifyEmailPage extends StatelessWidget {
                     ResendOtp(),
                     Sh(h: 0.04),
 
-                    PrimaryButton(title: 'VERIFY'),
+                    PrimaryButton(
+                      onTap: () {
+                        verificationSuccessfulDialog(context);
+                      },
+                      title: 'VERIFY',
+                    ),
 
                     Sh(h: 0.1),
                   ],
