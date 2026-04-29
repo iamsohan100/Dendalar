@@ -25,7 +25,7 @@ class SentenceMatchPage extends StatelessWidget {
                     MatchProgressMessage(),
                     Sh(h: 0.03),
                     SentenceCard(
-                      msg: 'This is my mother',
+                      msg: 'This is sparktech agency',
                       alignment: .centerLeft,
                     ),
                     Sh(h: 0.1),

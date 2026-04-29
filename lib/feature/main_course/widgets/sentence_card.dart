@@ -9,6 +9,7 @@ class SentenceCard extends StatelessWidget {
   const SentenceCard({super.key, required this.msg, this.alignment});
   final String msg;
   final Alignment? alignment;
+
   @override
   Widget build(BuildContext context) {
     // double height = Screen.screenHeight(context);
@@ -25,11 +26,10 @@ class SentenceCard extends StatelessWidget {
             width: scaleFactor * 60,
             fit: .contain,
           ),
-
           Sw(w: 0.035),
           MessageContainer2(msg: msg, maxWidth: 0.57, alignment: alignment),
           Sw(w: 0.035),
-          SoundCard(),
+          SoundCard(msg: msg),
         ],
       ),
     );
