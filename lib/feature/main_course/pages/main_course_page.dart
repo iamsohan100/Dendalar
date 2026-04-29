@@ -30,7 +30,7 @@ class MainCoursePage extends StatelessWidget {
                 if (mainCourseController.currentLevel.value > 0) {
                   levelLockedDialog(context: context);
                 } else {
-                  Get.toNamed(AppRoutes.stagePage);
+                  Get.toNamed(AppRoutes.chapterPage);
                 }
               },
               title: 'START LEVEL A${mainCourseController.currentLevel.value}',

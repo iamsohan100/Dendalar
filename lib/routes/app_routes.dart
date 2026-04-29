@@ -17,5 +17,6 @@ class AppRoutes {
   static const verifyEmailPage = '/verifyEmailPage';
   static const setNewPassPage = '/setNewPassPage';
   static const dashboardPage = '/dashboardPage';
-  static const stagePage = '/stagePage';
+  static const chapterPage = '/chapterPage';
+  static const sentenceMatchPage = '/sentenceMatchPage';
 }

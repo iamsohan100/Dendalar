@@ -4,6 +4,7 @@ import 'package:dendalar/feature/login/pages/login_page.dart';
 import 'package:dendalar/feature/login/pages/set_new_pass_page.dart';
 import 'package:dendalar/feature/login/pages/verify_email_page.dart';
 import 'package:dendalar/feature/main_course/pages/chapter_page.dart';
+import 'package:dendalar/feature/main_course/pages/sentence_match_page.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_1.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_2.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_3.dart';
@@ -116,8 +117,13 @@ class AppPages {
       transition: Transition.fadeIn,
     ),
       GetPage(
-      name: AppRoutes.stagePage,
+      name: AppRoutes.chapterPage,
       page: () => const ChapterPage(),
+      transition: Transition.fadeIn,
+    ),
+      GetPage(
+      name: AppRoutes.sentenceMatchPage,
+      page: () => const SentenceMatchPage(),
       transition: Transition.fadeIn,
     ),
   ];

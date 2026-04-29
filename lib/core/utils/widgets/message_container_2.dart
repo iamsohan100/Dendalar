@@ -5,9 +5,16 @@ import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class MessageContainer2 extends StatelessWidget {
-  const MessageContainer2({super.key, required this.msg, this.maxWidth});
+  const MessageContainer2({
+    super.key,
+    required this.msg,
+    this.maxWidth,
+    this.alignment,
+  });
   final String msg;
   final double? maxWidth;
+  final Alignment? alignment;
+
   @override
   Widget build(BuildContext context) {
     // double height = Screen.screenHeight(context);
@@ -32,7 +39,7 @@ class MessageContainer2 extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: scaleFactor * 14,
-              vertical: scaleFactor * 10,
+              vertical: scaleFactor * 14,
             ),
             constraints: BoxConstraints(
               minWidth: width * 0.3,
@@ -42,7 +49,7 @@ class MessageContainer2 extends StatelessWidget {
               color: AppColors.kaitokeGreen,
               borderRadius: BorderRadius.circular(scaleFactor * 12),
             ),
-            alignment: Alignment.center,
+            alignment: alignment ?? Alignment.center,
             child: CustomText(
               text: msg,
               color: AppColors.white,
