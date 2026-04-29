@@ -2,6 +2,7 @@ import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/app_bar/custom_app_bar.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
+import 'package:dendalar/feature/main_course/widgets/level_completed_dialog.dart';
 import 'package:flutter/material.dart';
 
 class StagePage extends StatelessWidget {
@@ -45,7 +46,12 @@ class StagePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Image.asset(AppImages.completedStage, scale: 4),
+                    GestureDetector(
+                      onTap: () {
+                        levelCompletedDialog(context: context);
+                      },
+                      child: Image.asset(AppImages.completedStage, scale: 4),
+                    ),
                     Sh(h: 0.02),
                   ],
                 ),

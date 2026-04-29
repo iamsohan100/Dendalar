@@ -6,7 +6,7 @@ import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:flutter/material.dart';
 
-void levelLockedDialog({required BuildContext context}) {
+void levelCompletedDialog({required BuildContext context}) {
   // final height = Screen.screenHeight(context);
   final width = Screen.screenWidth(context);
   final scaleFactor = width / Screen.designWidth;
@@ -28,7 +28,7 @@ void levelLockedDialog({required BuildContext context}) {
             children: [
               Sh(h: 0.01),
               CustomText(
-                text: 'Level Locked',
+                text: 'Level Completed',
                 color: AppColors.blackout,
                 fontSize: 20,
                 fontWeight: .w400,
@@ -36,14 +36,14 @@ void levelLockedDialog({required BuildContext context}) {
               ),
               Sh(h: 0.005),
               CustomText(
-                text: 'Unlock previous levels to start this one',
+                text: 'Congratulations! You have already completed this level.',
                 color: AppColors.darkGreyishBrown,
                 fontSize: 13,
                 fontWeight: .w400,
                 isManrope: true,
               ),
               Sh(h: 0.015),
-              Image.asset(AppImages.levelLocked, scale: 4),
+              Image.asset(AppImages.verify, scale: 4),
               Sh(h: 0.02),
               PrimaryButton(
                 onTap: () {
