@@ -22,6 +22,8 @@ class SentenceMatchController extends GetxController {
     });
   }
 
+  final RxBool hasAttempted = false.obs;
+
   void checkAnswer() {
     if (selectedWordList.isEmpty) return;
     String currentSentence = selectedWordList
@@ -29,8 +31,16 @@ class SentenceMatchController extends GetxController {
         .join(' ');
     if (currentSentence == correctSentence) {
       result.value = MatchResult.correct;
+      hasAttempted.value = false;
     } else {
       result.value = MatchResult.wrong;
+      hasAttempted.value = true;
+      // Wait for 2 seconds and then reset to none
+      Future.delayed(const Duration(seconds: 2), () {
+        if (result.value == MatchResult.wrong) {
+          result.value = MatchResult.none;
+        }
+      });
     }
   }
 

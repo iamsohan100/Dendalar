@@ -26,14 +26,15 @@ class CheckButton extends StatelessWidget {
                   onTap: () {
                     sentenceMatchController.checkAnswer();
                   },
-                  title:
-                      sentenceMatchController.result.value ==
+                  title: sentenceMatchController.result.value ==
                           MatchResult.correct
                       ? 'CORRECT'
                       : sentenceMatchController.result.value ==
-                            MatchResult.wrong
-                      ? 'WRONG'
-                      : 'CHECK',
+                              MatchResult.wrong
+                          ? 'WRONG'
+                          : sentenceMatchController.hasAttempted.value
+                              ? 'CHECK AGAIN'
+                              : 'CHECK',
                   backgroundColor:
                       sentenceMatchController.result.value ==
                           MatchResult.correct
