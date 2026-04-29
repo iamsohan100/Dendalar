@@ -35,7 +35,9 @@ class ChapterPage extends StatelessWidget {
                     Image.asset(AppImages.alphabet, scale: 4),
                     Sh(h: 0.02),
                     Image.asset(AppImages.lockChapter, scale: 4),
-                    Image.asset(AppImages.msgChapter, scale: 4),
+                    GestureDetector(
+                      onTap: () => Get.toNamed(AppRoutes.dialogMatchPage),
+                      child: Image.asset(AppImages.msgChapter, scale: 4)),
                     Stack(
                       clipBehavior: .none,
                       fit: .loose,

@@ -19,4 +19,5 @@ class AppRoutes {
   static const dashboardPage = '/dashboardPage';
   static const chapterPage = '/chapterPage';
   static const sentenceMatchPage = '/sentenceMatchPage';
+  static const dialogMatchPage = '/dialogMatchPage';
 }
