@@ -3,6 +3,7 @@ import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/feature/main_course/controller/sentence_match_controller.dart';
+import 'package:dendalar/feature/main_course/widgets/hind_dialog.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -76,6 +77,9 @@ class CheckButton extends StatelessWidget {
             Expanded(
               flex: 2,
               child: PrimaryButton(
+                onTap: () {
+                  hindDialog(context: context);
+                },
                 title: '',
                 backgroundColor: AppColors.white,
                 shadowColor: AppColors.darkOrange,

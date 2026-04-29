@@ -10,6 +10,8 @@ class SentenceMatchController extends GetxController {
   final selectedWordList = <int>[].obs; // Stores indices of selected words
   final Rx<MatchResult> result = MatchResult.none.obs;
   final String correctSentence = "Хlара сан нана йу";
+  final correctWordList = ['Хlара', 'сан', 'нана', 'йу'].obs;
+
 
   @override
   void onInit() {

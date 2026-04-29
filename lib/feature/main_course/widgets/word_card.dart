@@ -7,11 +7,11 @@ class WordCard extends StatelessWidget {
   const WordCard({
     super.key,
     required this.title,
-    required this.onTap,
+     this.onTap,
     this.isSelected = false,
   });
   final String title;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final bool isSelected;
 
   @override
