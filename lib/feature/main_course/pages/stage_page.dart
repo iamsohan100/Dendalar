@@ -24,25 +24,25 @@ class StagePage extends StatelessWidget {
                   children: [
                     Sh(h: 0.05),
                     Image.asset(AppImages.alphabetPlus, scale: 4),
-                    Image.asset(AppImages.summaryStage, scale: 4),
-                    Image.asset(AppImages.lockStage, scale: 4),
-                    Image.asset(AppImages.lockStage, scale: 4),
-                    Image.asset(AppImages.lockStage, scale: 4),
+                    Image.asset(AppImages.summaryChapter, scale: 4),
+                    Image.asset(AppImages.lockChapter, scale: 4),
+                    Image.asset(AppImages.lockChapter, scale: 4),
+                    Image.asset(AppImages.lockChapter, scale: 4),
 
                     Sh(h: 0.02),
                     Image.asset(AppImages.alphabet, scale: 4),
                     Sh(h: 0.02),
-                    Image.asset(AppImages.lockStage, scale: 4),
-                    Image.asset(AppImages.msgStage, scale: 4),
+                    Image.asset(AppImages.lockChapter, scale: 4),
+                    Image.asset(AppImages.msgChapter, scale: 4),
                     Stack(
                       clipBehavior: .none,
                       fit: .loose,
                       alignment: .center,
                       children: [
-                        Image.asset(AppImages.bookStage, scale: 4),
+                        Image.asset(AppImages.bookChapter, scale: 4),
                         Positioned(
                           left: -55,
-                          child: Image.asset(AppImages.stageCount, scale: 4),
+                          child: Image.asset(AppImages.chapterCount, scale: 4),
                         ),
                       ],
                     ),
@@ -50,7 +50,7 @@ class StagePage extends StatelessWidget {
                       onTap: () {
                         levelCompletedDialog(context: context);
                       },
-                      child: Image.asset(AppImages.completedStage, scale: 4),
+                      child: Image.asset(AppImages.completedChapter, scale: 4),
                     ),
                     Sh(h: 0.02),
                   ],
