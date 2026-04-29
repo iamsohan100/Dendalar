@@ -1,0 +1,59 @@
+import 'package:dendalar/core/constants/app_images.dart';
+import 'package:dendalar/core/utils/app_bar/custom_app_bar.dart';
+import 'package:dendalar/core/utils/responsive/sized_box.dart';
+import 'package:dendalar/core/utils/widgets/background.dart';
+import 'package:flutter/material.dart';
+
+class StagePage extends StatelessWidget {
+  const StagePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Background(
+        child: Column(
+          children: [
+            CustomAppBar(),
+            Expanded(
+              child: SingleChildScrollView(
+                reverse: true,
+                child: Column(
+                  mainAxisAlignment: .center,
+                  crossAxisAlignment: .center,
+                  children: [
+                    Sh(h: 0.05),
+                    Image.asset(AppImages.alphabetPlus, scale: 4),
+                    Image.asset(AppImages.summaryStage, scale: 4),
+                    Image.asset(AppImages.lockStage, scale: 4),
+                    Image.asset(AppImages.lockStage, scale: 4),
+                    Image.asset(AppImages.lockStage, scale: 4),
+
+                    Sh(h: 0.02),
+                    Image.asset(AppImages.alphabet, scale: 4),
+                    Sh(h: 0.02),
+                    Image.asset(AppImages.lockStage, scale: 4),
+                    Image.asset(AppImages.msgStage, scale: 4),
+                    Stack(
+                      clipBehavior: .none,
+                      fit: .loose,
+                      alignment: .center,
+                      children: [
+                        Image.asset(AppImages.bookStage, scale: 4),
+                        Positioned(
+                          left: -55,
+                          child: Image.asset(AppImages.stageCount, scale: 4),
+                        ),
+                      ],
+                    ),
+                    Image.asset(AppImages.completedStage, scale: 4),
+                    Sh(h: 0.02),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

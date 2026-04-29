@@ -19,4 +19,12 @@ class AppImages {
   static const String setPass = '$basePath/set_pass.png';
   static const String level = '$basePath/level.png';
   static const String levelLocked = '$basePath/level_locked.png';
+  static const String completedStage = '$basePath/completed_stage.png';
+  static const String bookStage = '$basePath/book_stage.png';
+  static const String msgStage = '$basePath/msg_stage.png';
+  static const String lockStage = '$basePath/lock_stage.png';
+  static const String alphabet = '$basePath/alphabet.png';
+  static const String summaryStage = '$basePath/summary_stage.png';
+  static const String alphabetPlus = '$basePath/alphabet++.png';
+  static const String stageCount = '$basePath/stage_count.png';
 }

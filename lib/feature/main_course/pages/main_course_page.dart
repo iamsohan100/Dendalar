@@ -7,6 +7,7 @@ import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/main_course/controller/main_course_controller.dart';
 import 'package:dendalar/feature/main_course/widgets/level_locked_dialog.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
+import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +29,8 @@ class MainCoursePage extends StatelessWidget {
               onTap: () {
                 if (mainCourseController.currentLevel.value > 0) {
                   levelLockedDialog(context: context);
-                  return;
+                } else {
+                  Get.toNamed(AppRoutes.stagePage);
                 }
               },
               title: 'START LEVEL A${mainCourseController.currentLevel.value}',
