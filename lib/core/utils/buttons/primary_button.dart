@@ -67,16 +67,17 @@ class PrimaryButton extends StatelessWidget {
                 crossAxisAlignment: .center,
                 children: [
                   icon!,
-                  CustomText(
-                    text: title,
-                    textAlign: TextAlign.center,
-                    textOverflow: TextOverflow.clip,
-                    fontSize: fontSize ?? 20,
-                    fontWeight: FontWeight.w400,
-                    color: fontColor ?? AppColors.white,
-                    isKoulen: isManjari == null ? true : null,
-                    isManjari: isManjari,
-                  ),
+                  if (title != '')
+                    CustomText(
+                      text: title,
+                      textAlign: TextAlign.center,
+                      textOverflow: TextOverflow.clip,
+                      fontSize: fontSize ?? 20,
+                      fontWeight: FontWeight.w400,
+                      color: fontColor ?? AppColors.white,
+                      isKoulen: isManjari == null ? true : null,
+                      isManjari: isManjari,
+                    ),
                 ],
               )
             : CustomText(

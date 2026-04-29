@@ -17,4 +17,7 @@ class AppColors {
   static const Color blazeRed = Color(0xFFF44336);
   static const Color sportyWhite = Color(0xFFEFF0F6);
   static const Color darkSilver = Color(0xFFAFAFAF);
+  static const Color darkOrange = Color(0xFFFB8C00);
+  static const Color winterRed = Color(0xFFA4211D);
+  static const Color scarletRose = Color(0xFFD13E2E);
 }

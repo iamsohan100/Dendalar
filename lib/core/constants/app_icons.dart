@@ -21,4 +21,7 @@ class AppIcons {
   static const String username = '$basePath/username.png';
   static const String edit = '$basePath/edit.png';
   static const String sound = '$basePath/sound.png';
+  static const String hind = '$basePath/hind.png';
+  static const String congrats = '$basePath/congrats.png';
+  static const String wrong = '$basePath/wrong.png';
 }
