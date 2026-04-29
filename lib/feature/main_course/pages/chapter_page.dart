@@ -5,8 +5,8 @@ import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/main_course/widgets/level_completed_dialog.dart';
 import 'package:flutter/material.dart';
 
-class StagePage extends StatelessWidget {
-  const StagePage({super.key});
+class ChapterPage extends StatelessWidget {
+  const ChapterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
