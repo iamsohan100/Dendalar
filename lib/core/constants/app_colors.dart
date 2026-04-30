@@ -20,4 +20,5 @@ class AppColors {
   static const Color darkOrange = Color(0xFFFB8C00);
   static const Color winterRed = Color(0xFFA4211D);
   static const Color scarletRose = Color(0xFFD13E2E);
+  static const Color sweetGrey = Color(0xFFD9D9D9);
 }
