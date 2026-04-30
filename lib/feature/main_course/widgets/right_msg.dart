@@ -3,30 +3,37 @@ import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
-import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RightMessage extends StatelessWidget {
-  const RightMessage({super.key, required this.msg});
+  const RightMessage({
+    super.key,
+    required this.msg,
+    this.filledWords = const [],
+    this.isCorrectList = const [], // Added validation list
+  });
   final String msg;
+  final List<String> filledWords;
+  final List<bool> isCorrectList; // Added validation list
+
   @override
   Widget build(BuildContext context) {
     // double height = Screen.screenHeight(context);
     double width = Screen.screenWidth(context);
     double scaleFactor = width / Screen.designWidth;
     return Align(
-      alignment: .topRight,
+      alignment: Alignment.topRight,
       child: Row(
-        mainAxisAlignment: .end,
-        crossAxisAlignment: .center,
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Align(
             alignment: Alignment.centerRight,
-
             child: Stack(
               fit: StackFit.loose,
               clipBehavior: Clip.none,
-              alignment: .center,
+              alignment: Alignment.center,
               children: [
                 Positioned(
                   right: -10,
@@ -54,28 +61,68 @@ class RightMessage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(scaleFactor * 12),
                   ),
                   alignment: Alignment.center,
-                  child: CustomText(
-                    text: msg,
-                    color: AppColors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                  child: RichText(
+                    text: TextSpan(
+                      children: _buildTextSpans(msg, filledWords, isCorrectList, scaleFactor),
+                      style: GoogleFonts.inter(
+                        fontSize: scaleFactor * 16,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
           Sw(w: 0.035),
-
           Transform.flip(
             flipX: true,
             child: Image.asset(
               AppImages.onboardingPage1,
               width: scaleFactor * 60,
-              fit: .contain,
+              fit: BoxFit.contain,
             ),
           ),
         ],
       ),
     );
+  }
+
+  List<TextSpan> _buildTextSpans(
+    String text,
+    List<String> words,
+    List<bool> isCorrectList,
+    double scaleFactor,
+  ) {
+    List<TextSpan> spans = [];
+    final parts = text.split(RegExp(r'_{2,}'));
+
+    for (int i = 0; i < parts.length; i++) {
+      spans.add(TextSpan(text: parts[i]));
+
+      if (i < parts.length - 1) {
+        bool isFilled = i < words.length;
+        String blankText = isFilled ? words[i] : "__________";
+
+        // Determine color based on correctness
+        Color textColor = AppColors.grayHint;
+        if (isFilled) {
+          bool isCorrect = i < isCorrectList.length ? isCorrectList[i] : true;
+          textColor = isCorrect ? AppColors.muslimGreen : AppColors.red;
+        }
+
+        spans.add(
+          TextSpan(
+            text: blankText,
+            style: TextStyle(
+              color: textColor,
+              fontWeight: isFilled ? FontWeight.bold : FontWeight.w500,
+            ),
+          ),
+        );
+      }
+    }
+    return spans;
   }
 }

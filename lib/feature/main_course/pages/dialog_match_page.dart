@@ -4,10 +4,9 @@ import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/main_course/controller/dialog_match_controller.dart';
+import 'package:dendalar/feature/main_course/widgets/blank_msg.dart';
 import 'package:dendalar/feature/main_course/widgets/fill_blank.dart';
-import 'package:dendalar/feature/main_course/widgets/left_msg.dart';
 import 'package:dendalar/feature/main_course/widgets/match_progress.dart';
-import 'package:dendalar/feature/main_course/widgets/right_msg.dart';
 import 'package:dendalar/feature/main_course/widgets/word_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +18,6 @@ class DialogMatchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = Screen.screenHeight(context);
     double width = Screen.screenWidth(context);
-    // double scaleFactor = width / Screen.designWidth;
     final dialogMatchController = Get.find<DialogMatchController>();
 
     return Scaffold(
@@ -30,8 +28,8 @@ class DialogMatchPage extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: .start,
-                  crossAxisAlignment: .center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Sh(h: 0.02),
                     MatchProgressMessage(),
@@ -50,51 +48,26 @@ class DialogMatchPage extends StatelessWidget {
                           )
                             WordCard(
                               onTap: () {
-                                if (dialogMatchController.selectedWordList
-                                    .contains(
-                                      dialogMatchController.wordList[i],
-                                    )) {
-                                  dialogMatchController.selectedWordList.remove(
-                                    dialogMatchController.wordList[i],
-                                  );
-                                } else {
-                                  dialogMatchController.selectedWordList.add(
-                                    dialogMatchController.wordList[i],
-                                  );
-                                }
+                                dialogMatchController.toggleWord(
+                                  i,
+                                ); // Use index
                               },
                               title: dialogMatchController.wordList[i],
-                              isSelected: dialogMatchController.selectedWordList
-                                  .contains(dialogMatchController.wordList[i]),
+                              isSelected: dialogMatchController.selectedIndices
+                                  .contains(i),
+                              isWrong: dialogMatchController.isWordWrong(
+                                i,
+                              ), // Show red if wrong
                             ),
                         ],
                       );
                     }),
-
                     Divider(
                       color: AppColors.chalice.withValues(alpha: 0.5),
                       thickness: 0.5,
                       height: height * 0.065,
                     ),
-                    LeftMessage(msg: "__________ йойла, Амина. Муха йу хьо?"),
-                    Sh(h: 0.02),
-                    RightMessage(
-                      msg: "Дална везийла, Адам. ______  йу, хьо муха ву?",
-                    ),
-                    Sh(h: 0.02),
-
-                    LeftMessage(msg: "__________ йойла, Амина. Муха йу хьо?"),
-                    Sh(h: 0.02),
-                    RightMessage(
-                      msg: "Дална везийла, Адам. ______  йу, хьо муха ву?",
-                    ),
-                    Sh(h: 0.02),
-
-                    LeftMessage(msg: "__________ йойла, Амина. Муха йу хьо?"),
-                    Sh(h: 0.02),
-                    RightMessage(
-                      msg: "Дална везийла, Адам. ______  йу, хьо муха ву?",
-                    ),
+                    BlankMessage(),
                     Sh(h: 0.1),
                   ],
                 ),
