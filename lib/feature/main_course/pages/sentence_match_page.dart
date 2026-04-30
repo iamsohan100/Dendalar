@@ -33,9 +33,9 @@ class SentenceMatchPage extends StatelessWidget {
                   mainAxisAlignment: .start,
                   crossAxisAlignment: .center,
                   children: [
-                    Sh(h: 0.03),
+                    Sh(h: 0.02),
                     MatchProgressMessage(),
-                    Sh(h: 0.03),
+                    Sh(h: 0.02),
                     SentenceCard(
                       msg: 'This is my mother',
                       alignment: .centerLeft,
