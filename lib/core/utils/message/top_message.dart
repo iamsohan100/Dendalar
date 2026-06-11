@@ -1,3 +1,4 @@
+import 'package:dendalar/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +10,7 @@ void topMessage({
   Get.snackbar(
     title,
     msg,
-    // colorText: textColor ?? AppColors.white,
+    colorText: textColor ?? AppColors.white,
     duration: const Duration(seconds: 3),
     snackPosition: SnackPosition.TOP,
   );
