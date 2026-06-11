@@ -8,7 +8,6 @@ import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/onboarding/widgets/board_4_message.dart';
-import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
 import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,51 +20,9 @@ class NamePage extends StatelessWidget {
     // double height = Screen.screenHeight(context);
     double width = Screen.screenWidth(context);
     // double scaleFactor = width / Screen.designWidth;
+    final bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
 
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: OnboardingButtons(
-        children: [
-          PrimaryButton(
-            onTap: () => Get.toNamed(AppRoutes.emailPage),
-            title: 'NEXT',
-          ),
-          Sh(h: 0.02),
-          Row(
-            spacing: width * 0.03,
-            mainAxisAlignment: .center,
-            children: [
-              SizedBox(
-                width: width * 0.15,
-                child: Divider(color: AppColors.chalice),
-              ),
-              CustomText(
-                text: 'or sign up with',
-                color: AppColors.darkGreyishBrown,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-
-              SizedBox(
-                width: width * 0.15,
-                child: Divider(color: AppColors.chalice),
-              ),
-            ],
-          ),
-          Sh(h: 0.02),
-
-          PrimaryButton(
-            title: 'Sign up using Google',
-            icon: Image.asset(AppIcons.google, scale: 4),
-            backgroundColor: AppColors.white,
-            borderColor: AppColors.chalice,
-            shadowColor: AppColors.chalice,
-            fontColor: AppColors.blackGrape,
-            isManjari: true,
-            fontSize: 14,
-          ),
-        ],
-      ),
       body: Background(
         child: SingleChildScrollView(
           child: Column(
@@ -81,8 +38,57 @@ class NamePage extends StatelessWidget {
               ),
               Sh(h: 0.05),
               CustomFormField(hintText: 'Enter your user name'),
+              Sh(h: isKeyboardOpen ? 0.1 : 0.35),
 
-              Sh(h: 0.2),
+              PrimaryButton(
+                onTap: () => Get.toNamed(AppRoutes.emailPage),
+                title: 'NEXT',
+              ),
+              Sh(h: 0.02),
+              Row(
+                spacing: width * 0.03,
+                mainAxisAlignment: .center,
+                children: [
+                  SizedBox(
+                    width: width * 0.15,
+                    child: Divider(color: AppColors.chalice),
+                  ),
+                  CustomText(
+                    text: 'or sign up with',
+                    color: AppColors.darkGreyishBrown,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+
+                  SizedBox(
+                    width: width * 0.15,
+                    child: Divider(color: AppColors.chalice),
+                  ),
+                ],
+              ),
+              Sh(h: 0.02),
+
+              PrimaryButton(
+                title: 'Sign up using Google',
+                icon: Image.asset(AppIcons.google, scale: 4),
+                backgroundColor: AppColors.white,
+                borderColor: AppColors.chalice,
+                shadowColor: AppColors.chalice,
+                fontColor: AppColors.blackGrape,
+                isManjari: true,
+                fontSize: 14,
+              ),
+              Sh(h: 0.01),
+              PrimaryButton(
+                onTap: () => Navigator.pop(context),
+                title: 'Back',
+                fontColor: AppColors.blackout,
+                backgroundColor: AppColors.transparent,
+                borderColor: AppColors.transparent,
+                shadowColor: AppColors.transparent,
+                isManjari: true,
+              ),
+              Sh(h: 0.05),
             ],
           ),
         ),

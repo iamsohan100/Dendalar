@@ -21,7 +21,7 @@ class CongratulationPage extends StatelessWidget {
         children: [
           PrimaryButton(
             onTap: () => Get.offAllNamed(AppRoutes.loginPage),
-            title: 'Continue',
+            title: 'Go to Login',
           ),
           Sh(h: 0.01),
         ],

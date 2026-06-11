@@ -1,3 +1,4 @@
+import 'package:dendalar/core/constants/app_colors.dart';
 import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/buttons/primary_button.dart';
@@ -18,17 +19,12 @@ class CompleteProfilePage extends StatelessWidget {
     // double height = Screen.screenHeight(context);
     // double width = Screen.screenWidth(context);
     // double scaleFactor = width / Screen.designWidth;
+    final bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: OnboardingButtons(
-        children: [
-          PrimaryButton(
-            onTap: () {
-              Get.toNamed(AppRoutes.congratulationPage);
-            },
-            title: 'Complete Profile'),
-          Sh(h: 0.01),
+      floatingActionButton: OnboardingButtons(children: [
+       
         ],
       ),
       body: Background(
@@ -48,14 +44,32 @@ class CompleteProfilePage extends StatelessWidget {
               CustomFormField(
                 hintText: 'Enter new password',
                 prefixIcon: Image.asset(AppIcons.pass, scale: 3),
+                isPassword: true,
               ),
               Sh(h: 0.02),
               CustomFormField(
                 hintText: 'Confirm new password',
                 prefixIcon: Image.asset(AppIcons.pass, scale: 3),
+                isPassword: true,
               ),
+              Sh(h: isKeyboardOpen ? 0.1 : 0.375),
 
-              Sh(h: 0.2),
+              PrimaryButton(
+                onTap: () {
+                  Get.offAllNamed(AppRoutes.congratulationPage);
+                },
+                title: 'Complete Profile',
+              ),
+              Sh(h: 0.01),
+              PrimaryButton(
+                onTap: () => Navigator.pop(context),
+                title: 'Back',
+                fontColor: AppColors.blackout,
+                backgroundColor: AppColors.transparent,
+                borderColor: AppColors.transparent,
+                shadowColor: AppColors.transparent,
+                isManjari: true,
+              ),
             ],
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:dendalar/core/constants/app_colors.dart';
 import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/buttons/primary_button.dart';
@@ -5,7 +6,6 @@ import 'package:dendalar/core/utils/form_field/custom_form_field.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/feature/onboarding/widgets/board_4_message.dart';
-import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
 import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,20 +18,9 @@ class EmailPage extends StatelessWidget {
     // double height = Screen.screenHeight(context);
     // double width = Screen.screenWidth(context);
     // double scaleFactor = width / Screen.designWidth;
+    final bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
 
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: OnboardingButtons(
-        children: [
-          PrimaryButton(
-            onTap: () {
-              Get.toNamed(AppRoutes.completeProfilePage);
-            },
-            title: 'NEXT',
-          ),
-          Sh(h: 0.01),
-        ],
-      ),
       body: Background(
         child: SingleChildScrollView(
           child: Column(
@@ -50,8 +39,25 @@ class EmailPage extends StatelessWidget {
                 hintText: 'Enter email address',
                 prefixIcon: Image.asset(AppIcons.email, scale: 3),
               ),
+              Sh(h: isKeyboardOpen ? 0.1 : 0.45),
 
-              Sh(h: 0.2),
+              PrimaryButton(
+                onTap: () {
+                  Get.toNamed(AppRoutes.completeProfilePage);
+                },
+                title: 'NEXT',
+              ),
+              Sh(h: 0.01),
+
+              PrimaryButton(
+                onTap: () => Navigator.pop(context),
+                title: 'Back',
+                fontColor: AppColors.blackout,
+                backgroundColor: AppColors.transparent,
+                borderColor: AppColors.transparent,
+                shadowColor: AppColors.transparent,
+                isManjari: true,
+              ),
             ],
           ),
         ),

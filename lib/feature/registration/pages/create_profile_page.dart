@@ -19,12 +19,13 @@ class CreateProfilePage extends StatelessWidget {
       floatingActionButton: OnboardingButtons(
         children: [
           PrimaryButton(
-            onTap: () =>Get.toNamed(AppRoutes.agePage),
-            title: 'CREATE PROFILE'),
+            onTap: () => Get.toNamed(AppRoutes.agePage),
+            title: 'CREATE PROFILE',
+          ),
           Sh(h: 0.01),
           PrimaryButton(
-
-            title: 'Skip',
+            onTap: () => Navigator.pop(context),
+            title: 'Back',
             fontColor: AppColors.blackout,
             backgroundColor: AppColors.transparent,
             borderColor: AppColors.transparent,

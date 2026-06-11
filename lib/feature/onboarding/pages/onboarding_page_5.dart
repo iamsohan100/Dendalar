@@ -28,7 +28,7 @@ class _OnboardingPage5State extends State<OnboardingPage5> {
   }
 
   void _routeNextPage() {
-    Timer(Duration(seconds: 1), () {
+    Timer(Duration(seconds: 2), () {
       Get.offNamed(AppRoutes.onboardingPage6);
     });
   }
