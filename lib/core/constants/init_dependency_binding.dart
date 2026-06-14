@@ -1,4 +1,5 @@
 import 'package:dendalar/feature/dashboard/controller/dashboard_controller.dart';
+import 'package:dendalar/feature/login/controller/login_controller.dart';
 import 'package:dendalar/feature/main_course/controller/dialog_match_controller.dart';
 import 'package:dendalar/feature/main_course/controller/main_course_controller.dart';
 import 'package:dendalar/feature/onboarding/controllers/onboarding_6_controller.dart';
@@ -19,5 +20,6 @@ class InitDependencyBinding extends Bindings {
     Get.lazyPut(() => DialogMatchController(), fenix: true);
     Get.lazyPut(() => RegistrationController(), fenix: true);
     Get.lazyPut(() => Onboarding6Controller(), fenix: true);
+    Get.lazyPut(() => LoginController(), fenix: true);
   }
 }

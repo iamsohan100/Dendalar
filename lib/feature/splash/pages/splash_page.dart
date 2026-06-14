@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
+import 'package:dendalar/core/utils/share_preference/auth_preference.dart';
 import 'package:dendalar/feature/splash/controllers/connection_checker_controller.dart';
 import 'package:dendalar/feature/splash/pages/no_internet_page.dart';
 import 'package:dendalar/routes/app_routes.dart';
@@ -22,23 +23,29 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // await _initializeSharePreference();
-      ever(connection.hasInternet, (bool hasInternet) {
-        if (hasInternet && mounted) {
-          _routeNextPage();
-        }
-      });
+      await AuthPreference().initializeToken();
+
+      // Already has internet? directly route
+      if (connection.hasInternet.value) {
+        _routeNextPage();
+      } else {
+        // Wait for internet to come
+        ever(connection.hasInternet, (bool hasInternet) {
+          if (hasInternet && mounted) {
+            _routeNextPage();
+          }
+        });
+      }
     });
   }
 
-  // Future<void> _initializeSharePreference() async {
-  //   await AuthPreference().initializeToken();
-  //   await OnBoardingPreference().initializeOnBoarding();
-  // }
-
   void _routeNextPage() {
     Timer(Duration(seconds: 1), () {
-      Get.offAllNamed(AppRoutes.onboardingPage1);
+      if (AuthPreference.userToken != null) {
+        Get.offAllNamed(AppRoutes.dashboardPage);
+      } else {
+        Get.offAllNamed(AppRoutes.onboardingPage1);
+      }
     });
   }
 

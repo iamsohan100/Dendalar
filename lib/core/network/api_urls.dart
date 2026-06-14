@@ -5,6 +5,7 @@ class ApiUrls {
   static final registration = "$baseUrl/auths/signup";
   static final verifyAccount = "$baseUrl/otps/verify";
   static final resendAccountVerifyOtp = "$baseUrl/otps/send";
+  static final login = "$baseUrl/auths/login";
 
   static String bookBySubjectId(String id) => "$baseUrl/books/$id";
 
