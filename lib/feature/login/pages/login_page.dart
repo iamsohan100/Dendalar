@@ -3,6 +3,7 @@ import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/form_field/custom_form_field.dart';
+import 'package:dendalar/core/utils/loading/main_loading.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
@@ -67,7 +68,8 @@ class LoginPage extends StatelessWidget {
               Sh(h: 0.025),
               PrimaryButton(
                 onTap: () {
-                  Get.offAllNamed(AppRoutes.dashboardPage);
+                  mainLoading(context);
+                  // Get.offAllNamed(AppRoutes.dashboardPage);
                 },
                 title: 'LOGIN',
               ),

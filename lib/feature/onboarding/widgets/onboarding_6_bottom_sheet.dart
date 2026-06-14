@@ -1,11 +1,13 @@
 import 'package:dendalar/core/constants/app_colors.dart';
 import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/utils/buttons/primary_button.dart';
+import 'package:dendalar/core/utils/message/bottom_message.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/feature/onboarding/controllers/onboarding_6_controller.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_card.dart';
+import 'package:dendalar/feature/registration/controller/registration_controller.dart';
 import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,12 +16,13 @@ void onboarding6BottomSheet(BuildContext context) {
   final height = Screen.screenHeight(context);
   final width = Screen.screenWidth(context);
   final scaleFactor = width / Screen.designWidth;
-  final controller = Get.put(Onboarding6Controller());
+  final controller = Get.find<Onboarding6Controller>();
+  final registrationController = Get.find<RegistrationController>();
   final cardsData = [
-    {'title': 'Facebook', 'icon': AppIcons.facebook},
-    {'title': 'Instagram', 'icon': AppIcons.instagram},
-    {'title': 'TikTok', 'icon': AppIcons.tiktok},
-    {'title': 'Other'},
+    {'title': 'FACEBOOK', 'icon': AppIcons.facebook},
+    {'title': 'INSTAGRAM', 'icon': AppIcons.instagram},
+    {'title': 'TIKTOK', 'icon': AppIcons.tiktok},
+    {'title': 'OTHER'},
   ];
   showModalBottomSheet(
     context: context,
@@ -79,6 +82,8 @@ void onboarding6BottomSheet(BuildContext context) {
                           icon: card['icon'], // Removed ! to allow null
                           onTap: () {
                             controller.isSelected.value = index;
+                            registrationController.referralSource.value =
+                                card['title']!.replaceAll(' ', '_');
                           },
                           isSelected: controller.isSelected.value == index,
                         );
@@ -91,7 +96,13 @@ void onboarding6BottomSheet(BuildContext context) {
                   Sh(h: 0.03),
 
                   PrimaryButton(
-                    onTap: () => Get.toNamed(AppRoutes.createProfilePage),
+                    onTap: () {
+                      if (registrationController.referralSource.value.isEmpty) {
+                        bottomMessage(msg: "Please select an option");
+                      } else {
+                        Get.toNamed(AppRoutes.createProfilePage);
+                      }
+                    },
                     title: 'Continue',
                   ),
                   Sh(h: 0.01),

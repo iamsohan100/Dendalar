@@ -28,7 +28,7 @@ void bottomMessage({required String? msg, bool error = false}) {
         ),
       ],
     ),
-    backgroundColor: AppColors.blackout.withValues(alpha: 0.7),
+    backgroundColor: AppColors.blackout,
     snackPosition: SnackPosition.BOTTOM,
     margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

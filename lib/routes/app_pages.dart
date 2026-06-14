@@ -19,6 +19,7 @@ import 'package:dendalar/feature/registration/pages/congratulation_page.dart';
 import 'package:dendalar/feature/registration/pages/create_profile_page.dart';
 import 'package:dendalar/feature/registration/pages/email_page.dart';
 import 'package:dendalar/feature/registration/pages/name_page.dart';
+import 'package:dendalar/feature/registration/pages/verify_account_page.dart';
 import 'package:dendalar/feature/splash/pages/splash_page.dart';
 import 'package:dendalar/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -136,6 +137,11 @@ class AppPages {
       GetPage(
       name: AppRoutes.matchCongratulationPage,
       page: () => const MatchCongratulationPage(),
+      transition: Transition.fadeIn,
+    ),
+      GetPage(
+      name: AppRoutes.verifyAccountPage,
+      page: () => const VerifyAccountPage(),
       transition: Transition.fadeIn,
     ),
   ];

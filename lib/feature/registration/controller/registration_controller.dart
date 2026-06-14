@@ -8,29 +8,38 @@ import 'package:dendalar/core/utils/message/bottom_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-class SignUpController extends GetxController {
+class RegistrationController extends GetxController {
+  final otp = ''.obs;
+  final signUpToken = ''.obs;
+  final purpose = ''.obs;
+  final referralSource = ''.obs;
+  final ageController = TextEditingController();
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final otp = ''.obs;
-  final signUpToken = ''.obs;
-  Future<bool> signUP(BuildContext context) async {
 
-
+  Future<bool> registration(BuildContext context) async {
     bool isSuccess = true;
     try {
       mainLoading(context);
 
       final response = await ApiCaller.postRequest(
         url: ApiUrls.registration,
-        body: {},
+        body: {
+          "email": emailController.text.trim(),
+          "password": passwordController.text.trim(),
+          "name": nameController.text.trim(),
+          "role": "USER",
+          "purpose": purpose.value,
+          "referralSource": referralSource.value,
+          "age": int.tryParse(ageController.text.trim()) ?? 2,
+        },
       );
 
       Navigator.pop(context);
       log("${response?.responseData.toString()}");
-      if (response?.statusCode == 200 && response?.isSuccess == true) {
-        signUpToken.value = response?.responseData['data']['signupPageToken'];
+      if (response?.statusCode == 201 && response?.isSuccess == true) {
       } else {
         bottomMessage(msg: response?.message);
         isSuccess = false;
@@ -44,35 +53,64 @@ class SignUpController extends GetxController {
     return isSuccess;
   }
 
-  // Future<bool> verifySignUpOtp(BuildContext context) async {
-  //   bool isSuccess = true;
+  Future<bool> verifyAccount(BuildContext context) async {
+    bool isSuccess = true;
 
-  //   try {
-  //     mainLoading(context);
+    try {
+      mainLoading(context);
 
-  //     final response = await ApiCaller.postRequest(
-  //       token: signUpToken.value,
-  //       url: ApiUrls.verifySignUpOtp,
-  //       body: {"otp": otp.value},
-  //     );
+      final response = await ApiCaller.postRequest(
+        url: ApiUrls.verifyAccount,
+        body: {
+          "email": emailController.text.trim(),
+          "otp": otp.value.trim(),
+          "purpose": "VERIFY_ACCOUNT",
+        },
+      );
 
-  //     Navigator.pop(context);
+      Navigator.pop(context);
 
-  //     log("${response?.responseData.toString()}");
-  //     if (response?.statusCode == 200 && response?.isSuccess == true) {
-  //       await AuthPreference().saveLoginToken(
-  //         token: response?.responseData['data']['accessToken'],
-  //       );
-  //     } else {
-  //       bottomMessage(msg: response?.message);
-  //       isSuccess = false;
-  //     }
-  //   } catch (e) {
-  //     bottomMessage(msg: e.toString());
-  //     isSuccess = false;
-  //   }
+      log("${response?.responseData.toString()}");
+      if (response?.statusCode == 200 && response?.isSuccess == true) {
+      } else {
+        bottomMessage(msg: response?.message);
+        isSuccess = false;
+      }
+    } catch (e) {
+      bottomMessage(msg: e.toString());
+      isSuccess = false;
+    }
 
-  //   return isSuccess;
-  // }
+    return isSuccess;
+  }
 
+  Future<bool> resendAccountVerifyOtp(BuildContext context) async {
+    bool isSuccess = true;
+
+    try {
+      mainLoading(context);
+
+      final response = await ApiCaller.postRequest(
+        url: ApiUrls.resendAccountVerifyOtp,
+        body: {
+          "email": emailController.text.trim(),
+          "purpose": "VERIFY_ACCOUNT",
+        },
+      );
+
+      Navigator.pop(context);
+
+      log("${response?.responseData.toString()}");
+      if (response?.statusCode == 200 && response?.isSuccess == true) {
+      } else {
+        bottomMessage(msg: response?.message);
+        isSuccess = false;
+      }
+    } catch (e) {
+      bottomMessage(msg: e.toString());
+      isSuccess = false;
+    }
+
+    return isSuccess;
+  }
 }
