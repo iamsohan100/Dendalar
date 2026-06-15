@@ -7,6 +7,7 @@ class ApiUrls {
   static final resendAccountVerifyOtp = "$baseUrl/otps/send";
   static final login = "$baseUrl/auths/login";
   static final passReset = "$baseUrl/auths/reset-password";
+  static final getProfile = "$baseUrl/profile";
 
   static String bookBySubjectId(String id) => "$baseUrl/books/$id";
 

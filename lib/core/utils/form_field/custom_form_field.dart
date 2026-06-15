@@ -27,6 +27,7 @@ class CustomFormField extends StatefulWidget {
   final bool? isRequired;
   final Color? titleColor;
   final bool? isNumber;
+  final Color? fontColor;
   final ValueChanged<String>? onChange;
   const CustomFormField({
     super.key,
@@ -50,7 +51,7 @@ class CustomFormField extends StatefulWidget {
     this.isRequired,
     this.horPadding,
     this.titleColor,
-    this.isNumber,
+    this.isNumber, this.fontColor,
   });
 
   @override
@@ -119,7 +120,7 @@ class _CustomFormField extends State<CustomFormField> {
           style: GoogleFonts.manjari(
             fontSize: scaleFactor * 14,
             fontWeight: FontWeight.w400,
-            color: AppColors.blackout,
+            color:widget.fontColor?? AppColors.blackout,
           ),
 
           obscureText: widget.isPassword && obSecure,

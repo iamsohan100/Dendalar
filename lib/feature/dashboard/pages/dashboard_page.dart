@@ -5,6 +5,7 @@ import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/feature/books/pages/book_page.dart';
 import 'package:dendalar/feature/dashboard/controller/dashboard_controller.dart';
 import 'package:dendalar/feature/main_course/pages/main_course_page.dart';
+import 'package:dendalar/feature/profile/controller/profile_controller.dart';
 import 'package:dendalar/feature/profile/pages/profile_page.dart';
 import 'package:dendalar/feature/vocabulary/pages/vocabulary_page.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,9 @@ class _DashboardPageState extends State<DashboardPage> {
     });
   }
 
-  void _apiCalling() {}
+  void _apiCalling() {
+    Get.find<ProfileController>().getProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
