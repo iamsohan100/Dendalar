@@ -1,4 +1,5 @@
 import 'package:dendalar/core/constants/app_colors.dart';
+import 'package:dendalar/core/utils/helper/validation_helper.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
@@ -29,6 +30,7 @@ class CustomFormField extends StatefulWidget {
   final bool? isNumber;
   final Color? fontColor;
   final ValueChanged<String>? onChange;
+  final bool? isPasswordValidation;
   const CustomFormField({
     super.key,
     this.controller,
@@ -51,7 +53,9 @@ class CustomFormField extends StatefulWidget {
     this.isRequired,
     this.horPadding,
     this.titleColor,
-    this.isNumber, this.fontColor,
+    this.isNumber,
+    this.fontColor,
+    this.isPasswordValidation,
   });
 
   @override
@@ -100,6 +104,8 @@ class _CustomFormField extends State<CustomFormField> {
           maxLines: widget.maxLine ?? 1,
           validator: widget.isValidator == false
               ? null
+              : widget.isPasswordValidation == true
+              ? ValidationHelper.validatePassword
               : widget.isMail == true
               ? (value) {
                   if (value?.trim().isEmpty ?? true) {
@@ -120,7 +126,7 @@ class _CustomFormField extends State<CustomFormField> {
           style: GoogleFonts.manjari(
             fontSize: scaleFactor * 14,
             fontWeight: FontWeight.w400,
-            color:widget.fontColor?? AppColors.blackout,
+            color: widget.fontColor ?? AppColors.blackout,
           ),
 
           obscureText: widget.isPassword && obSecure,

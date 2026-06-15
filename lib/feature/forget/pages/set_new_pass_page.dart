@@ -7,6 +7,7 @@ import 'package:dendalar/core/utils/message/bottom_message.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
+import 'package:dendalar/core/utils/widgets/password_required_helper.dart';
 import 'package:dendalar/feature/forget/controller/forget_controller.dart';
 import 'package:dendalar/feature/login/widgets/pass_saved_dialog.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,27 @@ class SetNewPassPage extends StatefulWidget {
 class _SetNewPassPageState extends State<SetNewPassPage> {
   final forgetController = Get.find<ForgetController>();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    forgetController.passwordController.addListener(_onPasswordChanged);
+  }
+
+  @override
+  void dispose() {
+    forgetController.passwordController.removeListener(_onPasswordChanged);
+    super.dispose();
+  }
+
+  void _onPasswordChanged() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    final password = forgetController.passwordController.text;
+
     return Scaffold(
       body: Background(
         child: SingleChildScrollView(
@@ -52,13 +72,17 @@ class _SetNewPassPageState extends State<SetNewPassPage> {
                   hintText: 'Enter new password',
                   prefixIcon: Image.asset(AppIcons.pass, scale: 3),
                   isPassword: true,
+                  isPasswordValidation: true,
                 ),
+                Sh(h: 0.02),
+                PasswordRequiredHelper(password: password),
                 Sh(h: 0.02),
                 CustomFormField(
                   controller: forgetController.confirmPasswordController,
                   hintText: 'Confirm New password',
                   prefixIcon: Image.asset(AppIcons.pass, scale: 3),
                   isPassword: true,
+                  isPasswordValidation: true,
                 ),
                 Sh(h: 0.07),
                 PrimaryButton(onTap: saveChanges, title: 'SAVE CHANGES'),

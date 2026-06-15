@@ -6,6 +6,7 @@ import 'package:dendalar/core/utils/form_field/custom_form_field.dart';
 import 'package:dendalar/core/utils/message/bottom_message.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
+import 'package:dendalar/core/utils/widgets/password_required_helper.dart';
 import 'package:dendalar/feature/onboarding/widgets/board_4_message.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
 import 'package:dendalar/feature/registration/controller/registration_controller.dart';
@@ -23,11 +24,28 @@ class CompleteProfilePage extends StatefulWidget {
 class _CompleteProfilePageState extends State<CompleteProfilePage> {
   final registrationController = Get.find<RegistrationController>();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    registrationController.passwordController.addListener(_onPasswordChanged);
+  }
+
+  @override
+  void dispose() {
+    registrationController.passwordController.removeListener(
+      _onPasswordChanged,
+    );
+    super.dispose();
+  }
+
+  void _onPasswordChanged() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    // double height = Screen.screenHeight(context);
-    // double width = Screen.screenWidth(context);
-    // double scaleFactor = width / Screen.designWidth;
+    final password = registrationController.passwordController.text;
     final bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
 
     return Scaffold(
@@ -59,13 +77,15 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
                   isPassword: true,
                 ),
                 Sh(h: 0.02),
+                PasswordRequiredHelper(password: password),
+                Sh(h: 0.02),
                 CustomFormField(
                   controller: registrationController.confirmPasswordController,
                   hintText: 'Confirm new password',
                   prefixIcon: Image.asset(AppIcons.pass, scale: 3),
                   isPassword: true,
                 ),
-                Sh(h: isKeyboardOpen ? 0.1 : 0.375),
+                Sh(h: isKeyboardOpen ? 0.1 : 0.25),
 
                 PrimaryButton(
                   onTap: completeProfile,
@@ -93,7 +113,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
     if (_formKey.currentState!.validate()) {
       if (registrationController.passwordController.text !=
           registrationController.confirmPasswordController.text) {
-        bottomMessage(msg: "Passwords do not match");
+        bottomMessage(msg: "Passwords do not match ⛔");
         return;
       }
       final response = await registrationController.registration(context);
