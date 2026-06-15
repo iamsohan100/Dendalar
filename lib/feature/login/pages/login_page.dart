@@ -60,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: loginController.passwordController,
                   hintText: 'Enter password',
                   prefixIcon: Image.asset(AppIcons.pass, scale: 3),
+                  isPassword: true,
                 ),
                 Sh(h: 0.015),
                 Align(

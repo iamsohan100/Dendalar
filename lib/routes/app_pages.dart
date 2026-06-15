@@ -1,8 +1,8 @@
 import 'package:dendalar/feature/dashboard/pages/dashboard_page.dart';
-import 'package:dendalar/feature/login/pages/forget_password_page.dart';
+import 'package:dendalar/feature/forget/pages/forget_password_page.dart';
 import 'package:dendalar/feature/login/pages/login_page.dart';
-import 'package:dendalar/feature/login/pages/set_new_pass_page.dart';
-import 'package:dendalar/feature/login/pages/verify_email_page.dart';
+import 'package:dendalar/feature/forget/pages/set_new_pass_page.dart';
+import 'package:dendalar/feature/forget/pages/verify_email_page.dart';
 import 'package:dendalar/feature/main_course/pages/chapter_page.dart';
 import 'package:dendalar/feature/main_course/pages/dialog_match_page.dart';
 import 'package:dendalar/feature/main_course/pages/match_congratulation_page.dart';

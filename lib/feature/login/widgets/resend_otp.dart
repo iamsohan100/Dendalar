@@ -1,8 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:dendalar/core/constants/app_colors.dart';
 import 'package:dendalar/core/utils/message/bottom_message.dart';
 import 'package:dendalar/core/utils/text/custom_rich_text.dart';
+import 'package:dendalar/feature/forget/controller/forget_controller.dart';
 import 'package:dendalar/feature/registration/controller/registration_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +20,7 @@ class ResendOtp extends StatefulWidget {
 
 class _ResendOtpState extends State<ResendOtp> {
   final registrationController = Get.find<RegistrationController>();
+  final forgetController = Get.find<ForgetController>();
   RxInt timeInSecond = 60.obs;
   Timer? _timer;
 
@@ -53,15 +57,7 @@ class _ResendOtpState extends State<ResendOtp> {
         return GestureDetector(
           onTap: timeInSecond.value == 0
               ? () async {
-                  if (widget.isAccountVerify == true) {
-                    final response = await registrationController
-                        .resendAccountVerifyOtp(context);
-                    if (response == true) {
-                      bottomMessage(msg: 'OTP sent successfully ✅');
-                      timeInSecond.value = 60;
-                      _startTimer();
-                    }
-                  }
+                  await _resendOtp();
                 }
               : null,
           child: CustomRichText(
@@ -79,5 +75,17 @@ class _ResendOtpState extends State<ResendOtp> {
         );
       }),
     );
+  }
+
+  Future<void> _resendOtp() async {
+    final response = widget.isAccountVerify == true
+        ? await registrationController.resendAccountVerifyOtp(context)
+        : await forgetController.resendVerifyEmailAddress(context);
+
+    if (response == true) {
+      bottomMessage(msg: 'OTP sent successfully ✅');
+      timeInSecond.value = 60;
+      _startTimer();
+    }
   }
 }

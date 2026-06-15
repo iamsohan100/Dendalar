@@ -11,7 +11,7 @@ dynamic verificationSuccessfulDialog(BuildContext context) {
   double width = Screen.screenWidth(context);
   double scaleFactor = width / Screen.designWidth;
 
-  Future.delayed(const Duration(seconds: 1), () {
+  Future.delayed(const Duration(milliseconds: 1500), () {
     if (context.mounted) {
       Navigator.pop(context);
     }

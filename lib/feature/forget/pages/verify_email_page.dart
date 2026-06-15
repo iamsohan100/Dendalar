@@ -1,13 +1,16 @@
 import 'package:dendalar/core/constants/app_colors.dart';
 import 'package:dendalar/core/utils/app_bar/custom_app_bar.dart';
 import 'package:dendalar/core/utils/buttons/primary_button.dart';
+import 'package:dendalar/core/utils/message/bottom_message.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
+import 'package:dendalar/feature/forget/controller/forget_controller.dart';
 import 'package:dendalar/feature/login/widgets/otp_field.dart';
 import 'package:dendalar/feature/login/widgets/resend_otp.dart';
 import 'package:dendalar/feature/login/widgets/verification_successful_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class VerifyEmailPage extends StatelessWidget {
   const VerifyEmailPage({super.key});
@@ -50,9 +53,7 @@ class VerifyEmailPage extends StatelessWidget {
                     Sh(h: 0.04),
 
                     PrimaryButton(
-                      onTap: () {
-                        verificationSuccessfulDialog(context);
-                      },
+                      onTap: () => verify(context),
                       title: 'VERIFY',
                     ),
 
@@ -65,5 +66,18 @@ class VerifyEmailPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+void verify(BuildContext context) async {
+  final forgetController = Get.find<ForgetController>();
+  if (forgetController.otp.value.isEmpty ||
+      forgetController.otp.value.length < 6) {
+    bottomMessage(msg: 'Please enter the OTP');
+    return;
+  }
+  final response = await forgetController.verifyAccount(context);
+  if (response && context.mounted) {
+    verificationSuccessfulDialog(context);
   }
 }
