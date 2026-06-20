@@ -1,4 +1,5 @@
 import 'package:dendalar/core/constants/app_colors.dart';
+import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
@@ -22,26 +23,46 @@ class MainCoursePage extends StatelessWidget {
     // double scaleFactor = width / Screen.designWidth;
     final mainCourseController = Get.find<MainCourseController>();
     return Obx(() {
+      final data = mainCourseController.levelModel.value.data;
+
       if (mainCourseController.inProgress.value) {
         return MainCourseLoading();
       }
+
       return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: OnboardingButtons(
           children: [
-            Obx(
-              () => PrimaryButton(
+            Obx(() {
+              final currentLevel = mainCourseController.currentLevel.value;
+
+              return PrimaryButton(
                 onTap: () {
-                  if (mainCourseController.currentLevel.value > 0) {
+                  if (data?[currentLevel].isLocked == true) {
                     levelLockedDialog(context: context);
                   } else {
                     Get.toNamed(AppRoutes.chapterPage);
                   }
                 },
-                title:
-                    'START LEVEL A${mainCourseController.currentLevel.value}',
-              ),
-            ),
+                title: 'START LEVEL ${data?[currentLevel].name}',
+                backgroundColor: data?[currentLevel].isLocked == true
+                    ? AppColors.primaryColor.withValues(alpha: 0.5)
+                    : null,
+                shadowColor: data?[currentLevel].isLocked == true
+                    ? AppColors.primaryColor.withValues(alpha: 0.5)
+                    : null,
+                borderColor: data?[currentLevel].isLocked == true
+                    ? AppColors.primaryColor.withValues(alpha: 0.5)
+                    : null,
+                icon: data?[currentLevel].isLocked == true
+                    ? Image.asset(
+                        AppIcons.pass,
+                        scale: 4,
+                        color: AppColors.white,
+                      )
+                    : null,
+              );
+            }),
             Sh(h: 0.01),
           ],
         ),
@@ -64,7 +85,7 @@ class MainCoursePage extends StatelessWidget {
                       child: PageView.builder(
                         controller: mainCourseController.pageController,
                         onPageChanged: mainCourseController.onPageChanged,
-                        itemCount: mainCourseController.maxLevel + 1,
+                        itemCount: mainCourseController.maxLevel.value + 1,
                         itemBuilder: (context, index) {
                           return Image.asset(AppImages.level);
                         },

@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class MainCourseController extends GetxController {
   final currentLevel = 0.obs;
-  final maxLevel = 3;
+  final maxLevel = 0.obs;
   late PageController pageController;
 
   final inProgress = false.obs;
@@ -22,7 +22,7 @@ class MainCourseController extends GetxController {
   }
 
   void nextLevel() {
-    if (currentLevel.value < maxLevel) {
+    if (currentLevel.value < maxLevel.value) {
       currentLevel.value++;
       pageController.animateToPage(
         currentLevel.value,
@@ -63,6 +63,7 @@ class MainCourseController extends GetxController {
       log("${response?.responseData.toString()}");
       if (response?.statusCode == 200 && response?.isSuccess == true) {
         levelModel.value = LevelModel.fromJson(response?.responseData);
+        maxLevel.value = (levelModel.value.data?.length ?? 1) - 1;
       } else {
         bottomMessage(msg: response?.message);
         isSuccess = false;

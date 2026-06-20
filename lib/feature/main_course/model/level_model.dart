@@ -43,6 +43,6 @@ class LevelData {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     isCompleted = json['isCompleted'];
-    isCompleted = json['isLocked'];
+    isLocked = json['isLocked'];
   }
 }
