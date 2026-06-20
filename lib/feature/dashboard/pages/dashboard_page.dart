@@ -4,6 +4,7 @@ import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/feature/books/pages/book_page.dart';
 import 'package:dendalar/feature/dashboard/controller/dashboard_controller.dart';
+import 'package:dendalar/feature/main_course/controller/main_course_controller.dart';
 import 'package:dendalar/feature/main_course/pages/main_course_page.dart';
 import 'package:dendalar/feature/profile/controller/profile_controller.dart';
 import 'package:dendalar/feature/profile/pages/profile_page.dart';
@@ -39,6 +40,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   void _apiCalling() {
     Get.find<ProfileController>().getProfile();
+    Get.find<MainCourseController>().getLevel();
   }
 
   @override

@@ -9,6 +9,7 @@ class ApiUrls {
   static final passReset = "$baseUrl/auths/reset-password";
   static final getProfile = "$baseUrl/profile";
   static final changePass = "$baseUrl/auths/change-password";
+  static final levels = "$baseUrl/levels";
 
   static String bookBySubjectId(String id) => "$baseUrl/books/$id";
 
