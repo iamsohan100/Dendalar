@@ -11,6 +11,7 @@ class ApiUrls {
   static final changePass = "$baseUrl/auths/change-password";
   static final levels = "$baseUrl/levels";
 
-  static String bookBySubjectId(String id) => "$baseUrl/books/$id";
+  static String getChapter(String id) => "$baseUrl/chapters?levelId=$id";
+
 
 }

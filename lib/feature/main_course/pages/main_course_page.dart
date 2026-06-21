@@ -5,6 +5,7 @@ import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
+import 'package:dendalar/feature/main_course/controller/chapter_controller.dart';
 import 'package:dendalar/feature/main_course/controller/main_course_controller.dart';
 import 'package:dendalar/feature/main_course/widgets/level_locked_dialog.dart';
 import 'package:dendalar/feature/main_course/widgets/main_course_loading.dart';
@@ -37,13 +38,11 @@ class MainCoursePage extends StatelessWidget {
               final currentLevel = mainCourseController.currentLevel.value;
 
               return PrimaryButton(
-                onTap: () {
-                  if (data?[currentLevel].isLocked == true) {
-                    levelLockedDialog(context: context);
-                  } else {
-                    Get.toNamed(AppRoutes.chapterPage);
-                  }
-                },
+                onTap: () => startLevel(
+                  context: context,
+                  id: data?[currentLevel].id,
+                  isLocked: data?[currentLevel].isLocked,
+                ),
                 title: 'START LEVEL ${data?[currentLevel].name}',
                 backgroundColor: data?[currentLevel].isLocked == true
                     ? AppColors.primaryColor.withValues(alpha: 0.5)
@@ -122,5 +121,25 @@ class MainCoursePage extends StatelessWidget {
         ),
       );
     });
+  }
+}
+
+void startLevel({
+  required BuildContext context,
+  String? id,
+  bool? isLocked,
+}) async {
+  final chapterController = Get.find<ChapterController>();
+
+  if (isLocked == true) {
+    levelLockedDialog(context: context);
+  } else {
+    final response = await chapterController.getChapter(
+      context: context,
+      id: id!,
+    );
+    if (response) {
+      Get.toNamed(AppRoutes.chapterPage);
+    }
   }
 }
