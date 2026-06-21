@@ -21,6 +21,8 @@ class LessonData {
   String? id;
   String? name;
   String? icon;
+  bool? isLocked;
+  bool? isComplete;
   int? index;
   String? createdAt;
   String? updatedAt;
@@ -30,6 +32,7 @@ class LessonData {
     this.name,
     this.icon,
     this.index,
+    this.isLocked,
     this.createdAt,
     this.updatedAt,
   });
@@ -39,6 +42,7 @@ class LessonData {
     name = json['name'];
     icon = json['icon'];
     index = json['index'];
+    isLocked = json['isLocked'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }

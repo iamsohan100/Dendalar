@@ -26,4 +26,7 @@ class AppImages {
   static const String chapterCount = '$basePath/chapter_count.png';
   static const String matchCongratulation = '$basePath/match_congratulation.png';
   static const String chapter = '$basePath/chapter.png';
+  static const String completedChapter = '$basePath/completed_chapter.png';
+  static const String rightDivider = '$basePath/right_divider.png';
+  static const String leftDivider = '$basePath/left_divider.png';
 }
