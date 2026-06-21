@@ -5,7 +5,7 @@ import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
-import 'package:dendalar/feature/main_course/controller/chapter_controller.dart';
+import 'package:dendalar/feature/main_course/controller/chapter_and_lesson_controller.dart';
 import 'package:dendalar/feature/main_course/controller/main_course_controller.dart';
 import 'package:dendalar/feature/main_course/widgets/level_locked_dialog.dart';
 import 'package:dendalar/feature/main_course/widgets/main_course_loading.dart';
@@ -129,7 +129,7 @@ void startLevel({
   String? id,
   bool? isLocked,
 }) async {
-  final chapterController = Get.find<ChapterController>();
+  final chapterController = Get.find<ChapterAndLessonController>();
 
   if (isLocked == true) {
     levelLockedDialog(context: context);

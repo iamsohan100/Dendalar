@@ -35,9 +35,11 @@ class ChapterPage extends StatelessWidget {
                     Image.asset(AppImages.alphabet, scale: 4),
                     Sh(h: 0.02),
                     Image.asset(AppImages.lockChapter, scale: 4),
+
                     GestureDetector(
                       onTap: () => Get.toNamed(AppRoutes.dialogMatchPage),
-                      child: Image.asset(AppImages.msgChapter, scale: 4)),
+                      child: Image.asset(AppImages.chapter, scale: 4),
+                    ),
                     Stack(
                       clipBehavior: .none,
                       fit: .loose,
@@ -47,7 +49,7 @@ class ChapterPage extends StatelessWidget {
                           onTap: () {
                             Get.toNamed(AppRoutes.sentenceMatchPage);
                           },
-                          child: Image.asset(AppImages.bookChapter, scale: 4),
+                          child: Image.asset(AppImages.chapter, scale: 4),
                         ),
                         Positioned(
                           left: -55,
@@ -59,7 +61,13 @@ class ChapterPage extends StatelessWidget {
                       onTap: () {
                         levelCompletedDialog(context: context);
                       },
-                      child: Image.asset(AppImages.completedChapter, scale: 4),
+                      child: Stack(
+                        alignment: .center,
+                        children: [
+                          Image.asset(AppImages.chapter, scale: 4),
+                          Image.asset(AppImages.verify, scale: 10),
+                        ],
+                      ),
                     ),
                   ],
                 ),

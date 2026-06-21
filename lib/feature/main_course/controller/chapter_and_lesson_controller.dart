@@ -7,11 +7,13 @@ import 'package:dendalar/core/network/api_urls.dart';
 import 'package:dendalar/core/utils/loading/main_loading.dart';
 import 'package:dendalar/core/utils/message/bottom_message.dart';
 import 'package:dendalar/feature/main_course/model/chapter_model.dart';
+import 'package:dendalar/feature/main_course/model/lesson_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ChapterController extends GetxController {
+class ChapterAndLessonController extends GetxController {
   Rx<ChapterModel> chapterModel = ChapterModel().obs;
+  Rx<LessonModel> lessonModel = LessonModel().obs;
 
   Future<bool> getChapter({
     required BuildContext context,
@@ -26,6 +28,28 @@ class ChapterController extends GetxController {
       log("${response?.responseData.toString()}");
       if (response?.statusCode == 200 && response?.isSuccess == true) {
         chapterModel.value = ChapterModel.fromJson(response?.responseData);
+        await getLesson();
+      } else {
+        bottomMessage(msg: response?.message);
+        isSuccess = false;
+      }
+    } catch (e) {
+      bottomMessage(msg: e.toString());
+      log(e.toString());
+      isSuccess = false;
+    }
+
+    return isSuccess;
+  }
+
+  Future<bool> getLesson() async {
+    bool isSuccess = true;
+    try {
+      final response = await ApiCaller.getRequest(url: ApiUrls.lesson);
+
+      log("${response?.responseData.toString()}");
+      if (response?.statusCode == 200 && response?.isSuccess == true) {
+        lessonModel.value = LessonModel.fromJson(response?.responseData);
       } else {
         bottomMessage(msg: response?.message);
         isSuccess = false;
