@@ -1,7 +1,8 @@
 import 'package:dendalar/core/constants/app_colors.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
-import 'package:dendalar/feature/main_course/controller/sentence_match_controller.dart';
+
+import 'package:dendalar/feature/main_course/controller/sentence_question_controller.dart';
 import 'package:dendalar/feature/main_course/widgets/word_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class SelectedWord extends StatelessWidget {
     // double height = Screen.screenHeight(context);
     double width = Screen.screenWidth(context);
     double scaleFactor = width / Screen.designWidth;
-    final sentenceMatchController = Get.find<SentenceMatchController>();
+    final sentenceQuestionController = Get.find<SentenceQuestionController>();
     return Obx(() {
       double lineHeight = 70 * scaleFactor;
       return Padding(
@@ -32,7 +33,7 @@ class SelectedWord extends StatelessWidget {
             child: Wrap(
               spacing: width * 0.02,
               runSpacing: 0, // Height is handled by children
-              children: sentenceMatchController.selectedWordList
+              children: sentenceQuestionController.selectedWordList
                   .map(
                     (index) => SizedBox(
                       height: lineHeight,
@@ -40,12 +41,11 @@ class SelectedWord extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           WordCard(
-                            title: sentenceMatchController.wordList[index],
+                            title: sentenceQuestionController.wordList[index],
                             isSelected: true,
                             onTap: () {
-                              sentenceMatchController.selectedWordList.remove(
-                                index,
-                              );
+                              sentenceQuestionController.selectedWordList
+                                  .remove(index);
                             },
                           ),
                           Sh(h: 0.01), // Gap to sit exactly on the line

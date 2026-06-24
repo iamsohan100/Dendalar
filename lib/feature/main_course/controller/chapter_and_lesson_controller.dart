@@ -40,24 +40,4 @@ class ChapterAndLessonController extends GetxController {
     return isSuccess;
   }
 
-  // Future<bool> getLesson() async {
-  //   bool isSuccess = true;
-  //   try {
-  //     final response = await ApiCaller.getRequest(url: ApiUrls.lesson);
-
-  //     log("${response?.responseData.toString()}");
-  //     if (response?.statusCode == 200 && response?.isSuccess == true) {
-  //       lessonModel.value = LessonModel.fromJson(response?.responseData);
-  //     } else {
-  //       bottomMessage(msg: response?.message);
-  //       isSuccess = false;
-  //     }
-  //   } catch (e) {
-  //     bottomMessage(msg: e.toString());
-  //     log(e.toString());
-  //     isSuccess = false;
-  //   }
-
-  //   return isSuccess;
-  // }
 }

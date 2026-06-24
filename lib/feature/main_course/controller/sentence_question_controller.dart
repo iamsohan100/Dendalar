@@ -1,9 +1,20 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:developer';
 import 'package:flutter_tts/flutter_tts.dart';
+
+import 'package:dendalar/core/network/api_caller.dart';
+import 'package:dendalar/core/network/api_urls.dart';
+import 'package:dendalar/core/utils/loading/main_loading.dart';
+import 'package:dendalar/core/utils/message/bottom_message.dart';
+import 'package:dendalar/feature/main_course/model/sentence_question_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 enum MatchResult { none, correct, wrong }
-
-class SentenceMatchController extends GetxController {
+class SentenceQuestionController extends GetxController {
+  Rx<SentenceQuestionModel> sentenceQuestionModel = SentenceQuestionModel().obs;
+  final totalQuestions = 0.obs;
+  final currentQuestion = 0.obs;
   final FlutterTts flutterTts = FlutterTts();
   final RxBool isPlaying = false.obs;
   final wordList = ['Хlара', 'сан', 'нана', 'йу'].obs;
@@ -84,5 +95,49 @@ class SentenceMatchController extends GetxController {
   Future<void> stop() async {
     await flutterTts.stop();
     isPlaying.value = false;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Future<bool> getSentenceQuestion({
+    required BuildContext context,
+    required String lessonId,
+  }) async {
+    bool isSuccess = true;
+    try {
+      mainLoading(context);
+      final response = await ApiCaller.getRequest(
+        url: ApiUrls.getSentenceQuestion(lessonId),
+      );
+
+      Navigator.pop(context);
+      log("${response?.responseData.toString()}");
+      if (response?.statusCode == 200 && response?.isSuccess == true) {
+        sentenceQuestionModel.value = SentenceQuestionModel.fromJson(
+          response?.responseData,
+        );
+        totalQuestions.value =
+            sentenceQuestionModel.value.questionList?.length ?? 1;
+      } else {
+        bottomMessage(msg: response?.message);
+        isSuccess = false;
+      }
+    } catch (e) {
+      bottomMessage(msg: e.toString());
+      log(e.toString());
+      isSuccess = false;
+    }
+
+    return isSuccess;
   }
 }

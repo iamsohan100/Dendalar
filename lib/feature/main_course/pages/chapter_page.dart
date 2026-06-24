@@ -5,6 +5,7 @@ import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/core/utils/widgets/empty_data.dart';
 import 'package:dendalar/feature/main_course/controller/chapter_and_lesson_controller.dart';
+import 'package:dendalar/feature/main_course/controller/sentence_question_controller.dart';
 import 'package:dendalar/feature/main_course/model/chapter_model.dart';
 import 'package:dendalar/feature/main_course/model/lesson_model.dart';
 import 'package:dendalar/feature/main_course/widgets/chapter_divider.dart';
@@ -22,7 +23,7 @@ class ChapterPage extends StatefulWidget {
 
 class _ChapterPageState extends State<ChapterPage> {
   final chapterAndLessonController = Get.find<ChapterAndLessonController>();
-
+  final sentenceQuestionController = Get.find<SentenceQuestionController>();
   @override
   Widget build(BuildContext context) {
     double width = Screen.screenWidth(context);
@@ -57,7 +58,7 @@ class _ChapterPageState extends State<ChapterPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Sh(h: 0.05),
+                      const Sh(h: 0.01),
                       ..._buildChapters(
                         context: context,
                         chapterList: chapterList.toList(),
@@ -142,7 +143,7 @@ class _ChapterPageState extends State<ChapterPage> {
           GestureDetector(
             onTap: () {
               if (lesson.lessonType == 'SENTENCE') {
-                Get.toNamed(AppRoutes.sentenceMatchPage);
+                getSentenceQuestion(lesson.id ?? '');
               } else {
                 Get.toNamed(AppRoutes.dialogMatchPage);
               }
@@ -160,6 +161,16 @@ class _ChapterPageState extends State<ChapterPage> {
           ),
         ],
       );
+    }
+  }
+
+  Future<void> getSentenceQuestion(String lessonId) async {
+    final response = await sentenceQuestionController.getSentenceQuestion(
+      context: context,
+      lessonId: lessonId,
+    );
+    if (response) {
+      Get.toNamed(AppRoutes.sentenceMatchPage);
     }
   }
 }

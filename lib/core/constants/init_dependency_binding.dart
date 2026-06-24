@@ -4,12 +4,12 @@ import 'package:dendalar/feature/login/controller/login_controller.dart';
 import 'package:dendalar/feature/main_course/controller/chapter_and_lesson_controller.dart';
 import 'package:dendalar/feature/main_course/controller/dialog_match_controller.dart';
 import 'package:dendalar/feature/main_course/controller/main_course_controller.dart';
+import 'package:dendalar/feature/main_course/controller/sentence_question_controller.dart';
 import 'package:dendalar/feature/onboarding/controllers/onboarding_6_controller.dart';
 import 'package:dendalar/feature/profile/controller/change_password_controller.dart';
 import 'package:dendalar/feature/profile/controller/profile_controller.dart';
 import 'package:dendalar/feature/registration/controller/registration_controller.dart';
 import 'package:dendalar/feature/splash/controllers/connection_checker_controller.dart';
-import 'package:dendalar/feature/main_course/controller/sentence_match_controller.dart';
 import 'package:get/get.dart';
 
 class InitDependencyBinding extends Bindings {
@@ -19,7 +19,6 @@ class InitDependencyBinding extends Bindings {
     Get.put(ProfileController());
     Get.put(ConnectionCheckerController());
     Get.put(MainCourseController());
-    Get.lazyPut(() => SentenceMatchController(), fenix: true);
     Get.lazyPut(() => DialogMatchController(), fenix: true);
     Get.lazyPut(() => RegistrationController(), fenix: true);
     Get.lazyPut(() => Onboarding6Controller(), fenix: true);
@@ -27,5 +26,6 @@ class InitDependencyBinding extends Bindings {
     Get.lazyPut(() => ForgetController(), fenix: true);
     Get.lazyPut(() => ChangePasswordController(), fenix: true);
     Get.lazyPut(() => ChapterAndLessonController(), fenix: true);
+    Get.lazyPut(() => SentenceQuestionController(), fenix: true);
   }
 }
