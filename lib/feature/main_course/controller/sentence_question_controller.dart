@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 import 'package:dendalar/feature/main_course/model/question_model.dart';
+import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 import 'package:dendalar/core/network/api_caller.dart';
@@ -47,9 +48,14 @@ class SentenceQuestionController extends GetxController {
     if (index < 0 || index >= quesitonList!.length) return;
 
     final question = quesitonList![index];
-    wordList.value = (question.sentenceInEnglish ?? '').split(" ");
-    correctSentence.value = question.sentenceInEnglish ?? '';
-    correctWordList.value = (question.sentenceInEnglish ?? '').split(" ");
+    final words = (question.sentenceInLearningLanguage ?? '').split(" ");
+
+    correctSentence.value = question.sentenceInLearningLanguage ?? '';
+    correctWordList.value = words;
+
+    // user কে দেখানোর জন্য shuffle করা word list
+    wordList.value = List.from(words)..shuffle();
+
     selectedWordList.clear();
     result.value = MatchResult.none;
   }
@@ -96,7 +102,7 @@ class SentenceQuestionController extends GetxController {
       currentQuestion.value = currentIndex.value + 1;
       loadQuestion(currentIndex.value);
     } else {
-      bottomMessage(msg: "You have completed all questions!");
+      Get.offNamed(AppRoutes.lessonCongratulationPage);
     }
   }
 

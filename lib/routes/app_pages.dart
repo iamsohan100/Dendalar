@@ -5,6 +5,7 @@ import 'package:dendalar/feature/forget/pages/set_new_pass_page.dart';
 import 'package:dendalar/feature/forget/pages/verify_email_page.dart';
 import 'package:dendalar/feature/main_course/pages/chapter_page.dart';
 import 'package:dendalar/feature/main_course/pages/dialog_match_page.dart';
+import 'package:dendalar/feature/main_course/pages/lesson_congratulation_page.dart';
 import 'package:dendalar/feature/main_course/pages/match_congratulation_page.dart';
 import 'package:dendalar/feature/main_course/pages/sentence_match_page.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_1.dart';
@@ -142,6 +143,11 @@ class AppPages {
       GetPage(
       name: AppRoutes.verifyAccountPage,
       page: () => const VerifyAccountPage(),
+      transition: Transition.fadeIn,
+    ),
+      GetPage(
+      name: AppRoutes.lessonCongratulationPage,
+      page: () => const LessonCongratulationPage(),
       transition: Transition.fadeIn,
     ),
   ];

@@ -22,4 +22,5 @@ class AppRoutes {
   static const dialogMatchPage = '/dialogMatchPage';
   static const matchCongratulationPage = '/matchCongratulationPage';
   static const verifyAccountPage = '/verifyAccountPage';
+  static const lessonCongratulationPage = '/lessonCongratulationPage';
 }

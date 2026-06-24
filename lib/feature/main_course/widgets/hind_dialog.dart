@@ -16,6 +16,12 @@ void hindDialog({required BuildContext context}) {
   final scaleFactor = width / Screen.designWidth;
   final sentenceQuestionController = Get.find<SentenceQuestionController>();
 
+  // current question বের করে আনছি
+  final currentQuestion = sentenceQuestionController
+      .quesitonList?[sentenceQuestionController.currentIndex.value];
+
+  final hintWordList = (currentQuestion?.hint ?? '').split(" ");
+
   showDialog(
     context: context,
     builder: (context) {
@@ -51,18 +57,13 @@ void hindDialog({required BuildContext context}) {
                 ],
               ),
               Sh(h: 0.02),
-
               Wrap(
                 spacing: width * 0.02,
                 runSpacing: height * 0.02,
                 children: [
-                  for (
-                    int i = 0;
-                    i < sentenceQuestionController.correctWordList.length;
-                    i++
-                  )
+                  for (int i = 0; i < hintWordList.length; i++)
                     WordCard(
-                      title: sentenceQuestionController.correctWordList[i],
+                      title: hintWordList[i],
                       isSelected: true,
                     ),
                 ],
@@ -77,7 +78,7 @@ void hindDialog({required BuildContext context}) {
                 ),
                 padding: .all(scaleFactor * 10),
                 child: CustomText(
-                  text: 'This is my mother',
+                  text: currentQuestion?.sentenceInEnglish ?? '',
                   color: AppColors.primaryColor,
                   fontSize: 14,
                   fontWeight: .w500,
