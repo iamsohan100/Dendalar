@@ -1,48 +1,31 @@
 class LessonModel {
-  bool? success;
-  String? message;
-  List<LessonData>? data;
-
-  LessonModel({this.success, this.message, this.data});
-
-  LessonModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    message = json['message'];
-    if (json['data'] != null) {
-      data = <LessonData>[];
-      json['data'].forEach((v) {
-        data!.add(LessonData.fromJson(v));
-      });
-    }
-  }
-}
-
-class LessonData {
   String? id;
-  String? name;
-  String? icon;
+  String? lessonType;
+  String? chapterId;
   bool? isLocked;
-  bool? isComplete;
+  bool? isCompleted;
   int? index;
   String? createdAt;
   String? updatedAt;
 
-  LessonData({
+  LessonModel({
     this.id,
-    this.name,
-    this.icon,
+    this.lessonType,
+    this.chapterId,
     this.index,
     this.isLocked,
+    this.isCompleted,
     this.createdAt,
     this.updatedAt,
   });
 
-  LessonData.fromJson(Map<String, dynamic> json) {
+  LessonModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
-    icon = json['icon'];
+    lessonType = json['lessonType'];
+    chapterId = json['chapterId'];
     index = json['index'];
     isLocked = json['isLocked'];
+    isCompleted = json['isCompleted'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }

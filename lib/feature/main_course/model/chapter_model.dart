@@ -1,17 +1,19 @@
+import 'package:dendalar/feature/main_course/model/lesson_model.dart';
+
 class ChapterModel {
   bool? success;
   String? message;
-  List<ChapterData>? data;
+  List<ChapterData>? chapterList;
 
-  ChapterModel({this.success, this.message, this.data});
+  ChapterModel({this.success, this.message, this.chapterList});
 
   ChapterModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <ChapterData>[];
+      chapterList = <ChapterData>[];
       json['data'].forEach((v) {
-        data!.add(ChapterData.fromJson(v));
+        chapterList!.add(ChapterData.fromJson(v));
       });
     }
   }
@@ -25,6 +27,7 @@ class ChapterData {
   String? createdAt;
   String? updatedAt;
   Level? level;
+  List<LessonModel>? lessonList;
 
   ChapterData({
     this.id,
@@ -34,6 +37,7 @@ class ChapterData {
     this.createdAt,
     this.updatedAt,
     this.level,
+    this.lessonList,
   });
 
   ChapterData.fromJson(Map<String, dynamic> json) {
@@ -44,6 +48,12 @@ class ChapterData {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     level = json['level'] != null ? Level.fromJson(json['level']) : null;
+    if (json['lessons'] != null) {
+      lessonList = <LessonModel>[];
+      json['lessons'].forEach((v) {
+        lessonList!.add(LessonModel.fromJson(v));
+      });
+    }
   }
 }
 

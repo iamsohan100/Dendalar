@@ -29,4 +29,7 @@ class AppImages {
   static const String completedChapter = '$basePath/completed_chapter.png';
   static const String rightDivider = '$basePath/right_divider.png';
   static const String leftDivider = '$basePath/left_divider.png';
+  static const String bookChapter = '$basePath/book_chapter.png';
+  static const String msgChapter = '$basePath/msg_chapter.png';
+
 }
