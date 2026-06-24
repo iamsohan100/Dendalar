@@ -37,10 +37,7 @@ class _SentenceMatchPageState extends State<SentenceMatchPage> {
             Expanded(
               child: SingleChildScrollView(
                 child: Obx(() {
-                  final quesitonList = sentenceQuestionController
-                      .sentenceQuestionModel
-                      .value
-                      .questionList;
+                  final quesitonList = sentenceQuestionController.quesitonList;
 
                   if (quesitonList == null || quesitonList.isEmpty) {
                     return const EmptyData(
@@ -51,6 +48,10 @@ class _SentenceMatchPageState extends State<SentenceMatchPage> {
                           'Check back later for new questions to test your knowledge.',
                     );
                   }
+
+                  final currentIndex =
+                      sentenceQuestionController.currentIndex.value;
+
                   return Column(
                     mainAxisAlignment: .start,
                     crossAxisAlignment: .center,
@@ -59,37 +60,35 @@ class _SentenceMatchPageState extends State<SentenceMatchPage> {
                       MatchProgressMessage(),
                       Sh(h: 0.02),
                       SentenceCard(
-                        msg: 'This is my mother',
+                        msg: quesitonList[currentIndex].sentenceInEnglish ?? '',
                         alignment: .centerLeft,
                       ),
                       Sh(h: 0.04),
                       SelectedWord(),
                       Sh(h: 0.1),
 
-                      Obx(() {
-                        return Wrap(
-                          spacing: width * 0.02,
-                          runSpacing: height * 0.02,
-                          children: [
-                            for (
-                              int i = 0;
-                              i < sentenceQuestionController.wordList.length;
-                              i++
-                            )
-                              if (!sentenceQuestionController.selectedWordList
-                                  .contains(i))
-                                WordCard(
-                                  onTap: () {
-                                    sentenceQuestionController.selectedWordList
-                                        .add(i);
-                                  },
-                                  title: sentenceQuestionController.wordList[i],
-                                  isSelected:
-                                      false, // Always false since we only show unselected ones
-                                ),
-                          ],
-                        );
-                      }),
+                      Wrap(
+                        spacing: width * 0.02,
+                        runSpacing: height * 0.02,
+                        children: [
+                          for (
+                            int i = 0;
+                            i < sentenceQuestionController.wordList.length;
+                            i++
+                          )
+                            if (!sentenceQuestionController.selectedWordList
+                                .contains(i))
+                              WordCard(
+                                onTap: () {
+                                  sentenceQuestionController.selectedWordList
+                                      .add(i);
+                                },
+                                title: sentenceQuestionController.wordList[i],
+                                isSelected:
+                                    false, // Always false since we only show unselected ones
+                              ),
+                        ],
+                      ),
 
                       Sh(h: 0.1),
                     ],

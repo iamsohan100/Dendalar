@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
+import 'package:dendalar/feature/main_course/model/question_model.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 import 'package:dendalar/core/network/api_caller.dart';
@@ -10,19 +11,26 @@ import 'package:dendalar/core/utils/message/bottom_message.dart';
 import 'package:dendalar/feature/main_course/model/sentence_question_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 enum MatchResult { none, correct, wrong }
+
 class SentenceQuestionController extends GetxController {
   Rx<SentenceQuestionModel> sentenceQuestionModel = SentenceQuestionModel().obs;
+  RxList<QuestionModel>? quesitonList = <QuestionModel>[].obs;
+
   final totalQuestions = 0.obs;
-  final currentQuestion = 0.obs;
+  final currentQuestion = 1.obs; // 1-based, UI progress দেখানোর জন্য
+  final currentIndex = 0.obs; // 0-based, list থেকে question বের করার জন্য
+
   final FlutterTts flutterTts = FlutterTts();
   final RxBool isPlaying = false.obs;
-  final wordList = ['Хlара', 'сан', 'нана', 'йу'].obs;
+
+  final wordList = [].obs;
   final selectedWordList = <int>[].obs; // Stores indices of selected words
   final Rx<MatchResult> result = MatchResult.none.obs;
-  final String correctSentence = "Хlара сан нана йу";
-  final correctWordList = ['Хlара', 'сан', 'нана', 'йу'].obs;
-
+  final correctSentence = "".obs;
+  final correctWordList = [].obs;
+  final RxBool hasAttempted = false.obs;
 
   @override
   void onInit() {
@@ -33,25 +41,62 @@ class SentenceQuestionController extends GetxController {
     });
   }
 
-  final RxBool hasAttempted = false.obs;
+  /// নির্দিষ্ট index এর question লোড করে wordList/correctSentence সেট করে
+  void loadQuestion(int index) {
+    if (quesitonList == null || quesitonList!.isEmpty) return;
+    if (index < 0 || index >= quesitonList!.length) return;
+
+    final question = quesitonList![index];
+    wordList.value = (question.sentenceInEnglish ?? '').split(" ");
+    correctSentence.value = question.sentenceInEnglish ?? '';
+    correctWordList.value = (question.sentenceInEnglish ?? '').split(" ");
+    selectedWordList.clear();
+    result.value = MatchResult.none;
+  }
 
   void checkAnswer() {
-    if (selectedWordList.isEmpty) return;
+    // কিছু select না করলে snack message দেখাবে
+    if (selectedWordList.isEmpty) {
+      bottomMessage(msg: "Please select words to form the sentence");
+      return;
+    }
+
     String currentSentence = selectedWordList
         .map((index) => wordList[index])
         .join(' ');
-    if (currentSentence == correctSentence) {
+
+    if (currentSentence == correctSentence.value) {
       result.value = MatchResult.correct;
       hasAttempted.value = false;
+
+      // সঠিক হলে কিছুক্ষণ পর পরের question এ যাবে (same page)
+      Future.delayed(const Duration(milliseconds: 800), () {
+        goToNextQuestion();
+      });
     } else {
       result.value = MatchResult.wrong;
       hasAttempted.value = true;
-      // Wait for 2 seconds and then reset to none
+
+      // ভুল হলে ২ সেকেন্ড পর selected word গুলো reset হবে
       Future.delayed(const Duration(seconds: 2), () {
+        selectedWordList.clear();
         if (result.value == MatchResult.wrong) {
           result.value = MatchResult.none;
         }
       });
+    }
+  }
+
+  /// পরের question-এ যাওয়ার জন্য
+  void goToNextQuestion() {
+    if (quesitonList == null || quesitonList!.isEmpty) return;
+
+    if (currentIndex.value < quesitonList!.length - 1) {
+      currentIndex.value++;
+      currentQuestion.value = currentIndex.value + 1;
+      loadQuestion(currentIndex.value);
+    } else {
+      bottomMessage(msg: "You have completed all questions!");
     }
   }
 
@@ -97,23 +142,18 @@ class SentenceQuestionController extends GetxController {
     isPlaying.value = false;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
   Future<bool> getSentenceQuestion({
     required BuildContext context,
     required String lessonId,
   }) async {
     bool isSuccess = true;
+    quesitonList?.clear();
+    wordList.clear();
+    selectedWordList.clear();
+    correctWordList.clear();
+    currentIndex.value = 0;
+    currentQuestion.value = 1;
+
     try {
       mainLoading(context);
       final response = await ApiCaller.getRequest(
@@ -126,8 +166,11 @@ class SentenceQuestionController extends GetxController {
         sentenceQuestionModel.value = SentenceQuestionModel.fromJson(
           response?.responseData,
         );
-        totalQuestions.value =
-            sentenceQuestionModel.value.questionList?.length ?? 1;
+        quesitonList?.addAll(sentenceQuestionModel.value.questionList ?? []);
+        totalQuestions.value = quesitonList?.length ?? 1;
+
+        // প্রথম question লোড করে ফেলি এখানেই
+        loadQuestion(0);
       } else {
         bottomMessage(msg: response?.message);
         isSuccess = false;
