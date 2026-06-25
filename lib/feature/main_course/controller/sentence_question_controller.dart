@@ -60,8 +60,7 @@ class SentenceQuestionController extends GetxController {
     result.value = MatchResult.none;
   }
 
-  void checkAnswer() {
-    // কিছু select না করলে snack message দেখাবে
+  Future<void> checkAnswer({required BuildContext context}) async {
     if (selectedWordList.isEmpty) {
       bottomMessage(msg: "Please select words to form the sentence");
       return;
@@ -75,15 +74,24 @@ class SentenceQuestionController extends GetxController {
       result.value = MatchResult.correct;
       hasAttempted.value = false;
 
-      // সঠিক হলে কিছুক্ষণ পর পরের question এ যাবে (same page)
-      Future.delayed(const Duration(milliseconds: 800), () {
+      final currentQuestionId = quesitonList?[currentIndex.value].id;
+      if (currentQuestionId == null) return;
+
+      // সঠিক উত্তর দেখানোর জন্য ১ সেকেন্ড অপেক্ষা
+      await Future.delayed(const Duration(seconds: 1));
+
+      final isSuccess = await activeQuestion(
+        context: context,
+        questionId: currentQuestionId,
+      );
+
+      if (isSuccess) {
         goToNextQuestion();
-      });
+      }
     } else {
       result.value = MatchResult.wrong;
       hasAttempted.value = true;
 
-      // ভুল হলে ২ সেকেন্ড পর selected word গুলো reset হবে
       Future.delayed(const Duration(seconds: 2), () {
         selectedWordList.clear();
         if (result.value == MatchResult.wrong) {
@@ -177,6 +185,36 @@ class SentenceQuestionController extends GetxController {
 
         // প্রথম question লোড করে ফেলি এখানেই
         loadQuestion(0);
+      } else {
+        bottomMessage(msg: response?.message);
+        isSuccess = false;
+      }
+    } catch (e) {
+      bottomMessage(msg: e.toString());
+      log(e.toString());
+      isSuccess = false;
+    }
+
+    return isSuccess;
+  }
+
+  Future<bool> activeQuestion({
+    required BuildContext context,
+    required String questionId,
+  }) async {
+    log("questionId:$questionId");
+    bool isSuccess = true;
+    try {
+      mainLoading(context);
+
+      final response = await ApiCaller.patchRequest(
+        url: ApiUrls.activeQuestion,
+        body: {"questionId": questionId},
+      );
+
+      Navigator.pop(context);
+      log("${response?.responseData.toString()}");
+      if (response?.statusCode == 200 && response?.isSuccess == true) {
       } else {
         bottomMessage(msg: response?.message);
         isSuccess = false;

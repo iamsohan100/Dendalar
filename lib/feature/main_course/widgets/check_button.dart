@@ -24,17 +24,18 @@ class CheckButton extends StatelessWidget {
               child: Obx(() {
                 return PrimaryButton(
                   onTap: () {
-                    sentenceQuestionController.checkAnswer();
+                    sentenceQuestionController.checkAnswer(context: context);
                   },
-                  title: sentenceQuestionController.result.value ==
+                  title:
+                      sentenceQuestionController.result.value ==
                           MatchResult.correct
                       ? 'CORRECT'
                       : sentenceQuestionController.result.value ==
-                              MatchResult.wrong
-                          ? 'WRONG'
-                          : sentenceQuestionController.hasAttempted.value
-                              ? 'CHECK AGAIN'
-                              : 'CHECK',
+                            MatchResult.wrong
+                      ? 'WRONG'
+                      : sentenceQuestionController.hasAttempted.value
+                      ? 'CHECK AGAIN'
+                      : 'CHECK',
                   backgroundColor:
                       sentenceQuestionController.result.value ==
                           MatchResult.correct
@@ -60,7 +61,8 @@ class CheckButton extends StatelessWidget {
                       ? AppColors.winterRed
                       : AppColors.chalice,
                   fontColor:
-                      sentenceQuestionController.result.value == MatchResult.none
+                      sentenceQuestionController.result.value ==
+                          MatchResult.none
                       ? AppColors.blackout
                       : AppColors.white,
                   icon:
