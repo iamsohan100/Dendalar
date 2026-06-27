@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
+import 'package:dendalar/feature/main_course/controller/active_lesson_controller.dart';
+import 'package:dendalar/feature/main_course/controller/active_question_controller.dart';
 import 'package:dendalar/feature/main_course/model/question_model.dart';
 import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -80,7 +82,7 @@ class SentenceQuestionController extends GetxController {
       // সঠিক উত্তর দেখানোর জন্য ১ সেকেন্ড অপেক্ষা
       await Future.delayed(const Duration(seconds: 1));
 
-      final isSuccess = await activeQuestion(
+      final isSuccess = await Get.find<ActiveQuestionController>().activeQuestion(
         context: context,
         questionId: currentQuestionId,
       );
@@ -118,10 +120,8 @@ class SentenceQuestionController extends GetxController {
         return;
       }
 
-      final isLessonSuccess = await activeLesson(
-        context: context,
-        lessonId: lessonId,
-      );
+      final isLessonSuccess = await Get.find<ActiveLessonController>()
+          .activeLesson(context: context, lessonId: lessonId);
 
       if (isLessonSuccess) {
         Get.offNamed(AppRoutes.lessonCongratulationPage);
@@ -218,63 +218,5 @@ class SentenceQuestionController extends GetxController {
     return isSuccess;
   }
 
-  Future<bool> activeQuestion({
-    required BuildContext context,
-    required String questionId,
-  }) async {
-    log("questionId:$questionId");
-    bool isSuccess = true;
-    try {
-      mainLoading(context);
 
-      final response = await ApiCaller.patchRequest(
-        url: ApiUrls.activeQuestion,
-        body: {"questionId": questionId},
-      );
-
-      Navigator.pop(context);
-      log("${response?.responseData.toString()}");
-      if (response?.statusCode == 200 && response?.isSuccess == true) {
-      } else {
-        bottomMessage(msg: response?.message);
-        isSuccess = false;
-      }
-    } catch (e) {
-      bottomMessage(msg: e.toString());
-      log(e.toString());
-      isSuccess = false;
-    }
-
-    return isSuccess;
-  }
-
-  Future<bool> activeLesson({
-    required BuildContext context,
-    required String lessonId,
-  }) async {
-    log("lessonId:$lessonId");
-    bool isSuccess = true;
-    try {
-      mainLoading(context);
-
-      final response = await ApiCaller.patchRequest(
-        url: ApiUrls.activeLesson,
-        body: {"lessonId": lessonId},
-      );
-
-      Navigator.pop(context);
-      log("${response?.responseData.toString()}");
-      if (response?.statusCode == 200 && response?.isSuccess == true) {
-      } else {
-        bottomMessage(msg: response?.message);
-        isSuccess = false;
-      }
-    } catch (e) {
-      bottomMessage(msg: e.toString());
-      log(e.toString());
-      isSuccess = false;
-    }
-
-    return isSuccess;
-  }
 }

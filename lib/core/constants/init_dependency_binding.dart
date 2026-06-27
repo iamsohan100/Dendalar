@@ -1,6 +1,8 @@
 import 'package:dendalar/feature/dashboard/controller/dashboard_controller.dart';
 import 'package:dendalar/feature/forget/controller/forget_controller.dart';
 import 'package:dendalar/feature/login/controller/login_controller.dart';
+import 'package:dendalar/feature/main_course/controller/active_lesson_controller.dart';
+import 'package:dendalar/feature/main_course/controller/active_question_controller.dart';
 import 'package:dendalar/feature/main_course/controller/chapter_and_lesson_controller.dart';
 import 'package:dendalar/feature/main_course/controller/dialog_match_controller.dart';
 import 'package:dendalar/feature/main_course/controller/main_course_controller.dart';
@@ -27,5 +29,7 @@ class InitDependencyBinding extends Bindings {
     Get.lazyPut(() => ChangePasswordController(), fenix: true);
     Get.lazyPut(() => ChapterAndLessonController(), fenix: true);
     Get.lazyPut(() => SentenceQuestionController(), fenix: true);
+    Get.lazyPut(() => ActiveLessonController(), fenix: true);
+    Get.lazyPut(() => ActiveQuestionController(), fenix: true);
   }
 }
