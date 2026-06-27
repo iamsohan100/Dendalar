@@ -11,6 +11,7 @@ class ApiUrls {
   static final changePass = "$baseUrl/auths/change-password";
   static final levels = "$baseUrl/levels";
   static final activeQuestion = "$baseUrl/profile/active-question";
+  static final activeLesson = "$baseUrl/profile/active-lesson";
 
   static String getChapter(String id) => "$baseUrl/chapters?levelId=$id";
   static String getSentenceQuestion(String lessonId) =>

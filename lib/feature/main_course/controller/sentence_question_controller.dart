@@ -86,7 +86,7 @@ class SentenceQuestionController extends GetxController {
       );
 
       if (isSuccess) {
-        goToNextQuestion();
+        await goToNextQuestion(context: context);
       }
     } else {
       result.value = MatchResult.wrong;
@@ -102,7 +102,7 @@ class SentenceQuestionController extends GetxController {
   }
 
   /// পরের question-এ যাওয়ার জন্য
-  void goToNextQuestion() {
+  Future<void> goToNextQuestion({required BuildContext context}) async {
     if (quesitonList == null || quesitonList!.isEmpty) return;
 
     if (currentIndex.value < quesitonList!.length - 1) {
@@ -110,7 +110,22 @@ class SentenceQuestionController extends GetxController {
       currentQuestion.value = currentIndex.value + 1;
       loadQuestion(currentIndex.value);
     } else {
-      Get.offNamed(AppRoutes.lessonCongratulationPage);
+      // সরাসরি QuestionModel এর lessonId থেকে নিচ্ছি
+      final lessonId = quesitonList?[currentIndex.value].lessonId;
+
+      if (lessonId == null) {
+        Get.offNamed(AppRoutes.lessonCongratulationPage);
+        return;
+      }
+
+      final isLessonSuccess = await activeLesson(
+        context: context,
+        lessonId: lessonId,
+      );
+
+      if (isLessonSuccess) {
+        Get.offNamed(AppRoutes.lessonCongratulationPage);
+      }
     }
   }
 
@@ -215,6 +230,36 @@ class SentenceQuestionController extends GetxController {
       final response = await ApiCaller.patchRequest(
         url: ApiUrls.activeQuestion,
         body: {"questionId": questionId},
+      );
+
+      Navigator.pop(context);
+      log("${response?.responseData.toString()}");
+      if (response?.statusCode == 200 && response?.isSuccess == true) {
+      } else {
+        bottomMessage(msg: response?.message);
+        isSuccess = false;
+      }
+    } catch (e) {
+      bottomMessage(msg: e.toString());
+      log(e.toString());
+      isSuccess = false;
+    }
+
+    return isSuccess;
+  }
+
+  Future<bool> activeLesson({
+    required BuildContext context,
+    required String lessonId,
+  }) async {
+    log("lessonId:$lessonId");
+    bool isSuccess = true;
+    try {
+      mainLoading(context);
+
+      final response = await ApiCaller.patchRequest(
+        url: ApiUrls.activeLesson,
+        body: {"lessonId": lessonId},
       );
 
       Navigator.pop(context);
