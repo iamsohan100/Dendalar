@@ -103,7 +103,7 @@ class RightMessage extends StatelessWidget {
 
       if (i < parts.length - 1) {
         bool isFilled = i < words.length;
-        String blankText = isFilled ? words[i] : "__________";
+        String blankText = isFilled ? words[i] : "______";
 
         // Determine color based on correctness
         Color textColor = AppColors.grayHint;

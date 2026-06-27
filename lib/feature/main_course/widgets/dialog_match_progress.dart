@@ -3,64 +3,61 @@ import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
-import 'package:dendalar/feature/main_course/controller/sentence_question_controller.dart';
+import 'package:dendalar/feature/main_course/controller/dialog_match_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MatchProgressMessage extends StatelessWidget {
-  const MatchProgressMessage({super.key});
+/// Dialog match page-এর জন্য progress widget
+class DialogMatchProgress extends StatelessWidget {
+  const DialogMatchProgress({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // double height = Screen.screenHeight(context);
     double width = Screen.screenWidth(context);
     double scaleFactor = width / Screen.designWidth;
-    final sentenceQuestionController = Get.find<SentenceQuestionController>();
+    final controller = Get.find<DialogMatchController>();
 
     return Align(
-      alignment: .topLeft,
+      alignment: Alignment.topLeft,
       child: Obx(() {
-        final totalQuestion = sentenceQuestionController.totalQuestions.value;
-        final currentQuestion =
-            sentenceQuestionController.currentQuestion.value;
-        final progress = totalQuestion == 0
-            ? 0
-            : (currentQuestion / totalQuestion);
+        // ✅ Rx variables সরাসরি read করা → Obx reactive থাকবে
+        final completed = controller.completedDialogs.value;
+        final total = controller.totalDialogs.value;
+        final progress = total == 0 ? 0.0 : completed / total;
         return Row(
-          mainAxisAlignment: .center,
-          crossAxisAlignment: .center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              clipBehavior: .antiAlias,
+              clipBehavior: Clip.antiAlias,
               width: scaleFactor * 46,
               height: scaleFactor * 46,
               decoration: BoxDecoration(
                 color: AppColors.grayHint,
-                shape: .circle,
+                shape: BoxShape.circle,
               ),
               child: Image.asset(
                 AppImages.onboardingPage4,
                 scale: 4.5,
-                fit: .contain,
+                fit: BoxFit.contain,
               ),
             ),
             Sw(w: 0.035),
             Expanded(
               child: LinearProgressIndicator(
-                value: progress.toDouble(),
+                value: progress,
                 minHeight: scaleFactor * 10,
                 backgroundColor: AppColors.sportyWhite,
                 color: AppColors.primaryColor,
-                borderRadius: .circular(scaleFactor * 16),
+                borderRadius: BorderRadius.circular(scaleFactor * 16),
               ),
             ),
             Sw(w: 0.035),
-
             CustomText(
               text: '${(progress * 100).toStringAsFixed(0)}%',
               color: AppColors.muslimGreen,
               fontSize: 20,
-              fontWeight: .w400,
+              fontWeight: FontWeight.w400,
               isKoulen: true,
             ),
           ],

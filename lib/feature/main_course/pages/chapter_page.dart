@@ -5,6 +5,7 @@ import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/core/utils/widgets/empty_data.dart';
 import 'package:dendalar/feature/main_course/controller/chapter_and_lesson_controller.dart';
+import 'package:dendalar/feature/main_course/controller/dialog_match_controller.dart';
 import 'package:dendalar/feature/main_course/controller/sentence_question_controller.dart';
 import 'package:dendalar/feature/main_course/model/chapter_model.dart';
 import 'package:dendalar/feature/main_course/model/lesson_model.dart';
@@ -24,6 +25,7 @@ class ChapterPage extends StatefulWidget {
 class _ChapterPageState extends State<ChapterPage> {
   final chapterAndLessonController = Get.find<ChapterAndLessonController>();
   final sentenceQuestionController = Get.find<SentenceQuestionController>();
+  final dialogMatchController = Get.find<DialogMatchController>();
   @override
   Widget build(BuildContext context) {
     double width = Screen.screenWidth(context);
@@ -145,7 +147,7 @@ class _ChapterPageState extends State<ChapterPage> {
               if (lesson.lessonType == 'SENTENCE') {
                 getSentenceQuestion(lesson.id ?? '');
               } else {
-                Get.toNamed(AppRoutes.dialogMatchPage);
+                getDialogQuestion(lesson.id ?? '');
               }
             },
             child: Image.asset(
@@ -171,6 +173,17 @@ class _ChapterPageState extends State<ChapterPage> {
     );
     if (response) {
       Get.toNamed(AppRoutes.sentenceMatchPage);
+    }
+  }
+
+  Future<void> getDialogQuestion(String lessonId) async {
+    final response = await dialogMatchController.getDialogQuestion(
+      context: context,
+      lessonId: lessonId,
+      page: 1,
+    );
+    if (response) {
+      Get.toNamed(AppRoutes.dialogMatchPage);
     }
   }
 }

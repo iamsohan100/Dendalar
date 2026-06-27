@@ -16,4 +16,7 @@ class ApiUrls {
   static String getChapter(String id) => "$baseUrl/chapters?levelId=$id";
   static String getSentenceQuestion(String lessonId) =>
       "$baseUrl/questions/lesson/$lessonId?page=1&limit=1000";
+
+  static String getDialogQuestion(String lessonId, int page) =>
+      "$baseUrl/questions/lesson/$lessonId?page=$page&limit=4";
 }

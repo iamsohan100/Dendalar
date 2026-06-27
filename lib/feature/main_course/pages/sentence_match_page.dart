@@ -5,7 +5,7 @@ import 'package:dendalar/core/utils/widgets/background.dart';
 import 'package:dendalar/core/utils/widgets/empty_data.dart';
 import 'package:dendalar/feature/main_course/controller/sentence_question_controller.dart';
 import 'package:dendalar/feature/main_course/widgets/check_button.dart';
-import 'package:dendalar/feature/main_course/widgets/match_progress.dart';
+import 'package:dendalar/feature/main_course/widgets/sentence_match_progress.dart';
 import 'package:dendalar/feature/main_course/widgets/selected_word.dart';
 import 'package:dendalar/feature/main_course/widgets/sentence_card.dart';
 import 'package:dendalar/feature/main_course/widgets/word_card.dart';
@@ -57,7 +57,7 @@ class _SentenceMatchPageState extends State<SentenceMatchPage> {
                     crossAxisAlignment: .center,
                     children: [
                       Sh(h: 0.02),
-                      MatchProgressMessage(),
+                      SentenceMatchProgress(),
                       Sh(h: 0.02),
                       SentenceCard(
                         msg: quesitonList[currentIndex].sentenceInEnglish ?? '',
