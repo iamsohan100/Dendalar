@@ -180,7 +180,12 @@ class SentenceQuestionController extends GetxController {
         sentenceQuestionModel.value = SentenceQuestionModel.fromJson(
           response?.responseData,
         );
-        quesitonList?.addAll(sentenceQuestionModel.value.questionList ?? []);
+        final incompleteQuestions =
+            (sentenceQuestionModel.value.questionList ?? [])
+                .where((q) => q.isCompleted == false)
+                .toList();
+
+        quesitonList?.addAll(incompleteQuestions);
         totalQuestions.value = quesitonList?.length ?? 1;
 
         // প্রথম question লোড করে ফেলি এখানেই

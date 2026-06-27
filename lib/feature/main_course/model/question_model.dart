@@ -14,21 +14,24 @@ class QuestionModel {
   String? createdAt;
   String? updatedAt;
   LessonModel? lesson;
+  bool? isCompleted;
 
-  QuestionModel(
-      {this.id,
-      this.chapterId,
-      this.lessonId,
-      this.sentenceInEnglish,
-      this.sentenceInLearningLanguage,
-      this.hint,
-      // this.fullSentence,
-      // this.missingWord,
-      this.index,
-      this.type,
-      this.createdAt,
-      this.updatedAt,
-      this.lesson});
+  QuestionModel({
+    this.id,
+    this.chapterId,
+    this.lessonId,
+    this.sentenceInEnglish,
+    this.sentenceInLearningLanguage,
+    this.hint,
+    // this.fullSentence,
+    // this.missingWord,
+    this.index,
+    this.type,
+    this.createdAt,
+    this.updatedAt,
+    this.lesson,
+    this.isCompleted,
+  });
 
   QuestionModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -43,8 +46,9 @@ class QuestionModel {
     type = json['type'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    lesson =
-        json['lesson'] != null ? LessonModel.fromJson(json['lesson']) : null;
+    lesson = json['lesson'] != null
+        ? LessonModel.fromJson(json['lesson'])
+        : null;
+    isCompleted = json['isCompleted'];
   }
-
 }
