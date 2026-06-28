@@ -15,6 +15,8 @@ import 'package:dendalar/feature/onboarding/pages/onboarding_page_3.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_4.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_5.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_6.dart';
+import 'package:dendalar/feature/profile/pages/about_us_page.dart';
+import 'package:dendalar/feature/profile/pages/privacy_policy_page.dart';
 import 'package:dendalar/feature/registration/pages/age_page.dart';
 import 'package:dendalar/feature/registration/pages/complete_profile_page.dart';
 import 'package:dendalar/feature/registration/pages/congratulation_page.dart';
@@ -53,12 +55,12 @@ class AppPages {
       page: () => const OnboardingPage3(),
       transition: Transition.fadeIn,
     ),
-     GetPage(
+    GetPage(
       name: AppRoutes.onboardingPage4,
       page: () => const OnboardingPage4(),
       transition: Transition.fadeIn,
     ),
-     GetPage(
+    GetPage(
       name: AppRoutes.onboardingPage5,
       page: () => const OnboardingPage5(),
       transition: Transition.fadeIn,
@@ -103,57 +105,67 @@ class AppPages {
       page: () => const LoginPage(),
       transition: Transition.fadeIn,
     ),
-    
+
     GetPage(
       name: AppRoutes.forgetPasswordPage,
       page: () => const ForgetPasswordPage(),
       transition: Transition.fadeIn,
     ),
 
-     GetPage(
+    GetPage(
       name: AppRoutes.verifyEmailPage,
       page: () => const VerifyEmailPage(),
       transition: Transition.fadeIn,
     ),
 
-      GetPage(
+    GetPage(
       name: AppRoutes.setNewPassPage,
       page: () => const SetNewPassPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.chapterPage,
       page: () => const ChapterPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.sentenceMatchPage,
       page: () => const SentenceMatchPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.dialogMatchPage,
       page: () => const DialogMatchPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.verifyAccountPage,
       page: () => const VerifyAccountPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.lessonCongratulationPage,
       page: () => const LessonCongratulationPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.levelCongratulationPage,
       page: () => const LevelCongratulationPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.levelResetPage,
       page: () => const LevelResetPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.aboutUsPage,
+      page: () => const AboutUsPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.privacyPolicyPage,
+      page: () => const PrivacyPolicyPage(),
       transition: Transition.fadeIn,
     ),
   ];

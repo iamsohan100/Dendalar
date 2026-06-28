@@ -12,6 +12,7 @@ import 'package:dendalar/feature/main_course/controller/sentence_question_contro
 import 'package:dendalar/feature/main_course/controller/summary_lesson_controller.dart';
 import 'package:dendalar/feature/onboarding/controllers/onboarding_6_controller.dart';
 import 'package:dendalar/feature/profile/controller/change_password_controller.dart';
+import 'package:dendalar/feature/profile/controller/privacy_about_controller.dart';
 import 'package:dendalar/feature/profile/controller/profile_controller.dart';
 import 'package:dendalar/feature/registration/controller/registration_controller.dart';
 import 'package:dendalar/feature/splash/controllers/connection_checker_controller.dart';
@@ -37,5 +38,6 @@ class InitDependencyBinding extends Bindings {
     Get.lazyPut(() => ActiveLevelController(), fenix: true);
     Get.lazyPut(() => SummaryLessonController(), fenix: true);
     Get.lazyPut(() => ResetLevelController(), fenix: true);
+    Get.lazyPut(() => PrivacyAboutController(), fenix: true);
   }
 }

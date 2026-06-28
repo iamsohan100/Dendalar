@@ -24,4 +24,6 @@ class AppRoutes {
   static const lessonCongratulationPage = '/lessonCongratulationPage';
   static const levelCongratulationPage = '/levelCongratulationPage';
   static const levelResetPage = '/levelResetPage';
+  static const aboutUsPage = '/aboutUsPage';
+  static const privacyPolicyPage = '/privacyPolicyPage';
 }

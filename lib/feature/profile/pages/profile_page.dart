@@ -10,6 +10,7 @@ import 'package:dendalar/feature/profile/controller/profile_controller.dart';
 import 'package:dendalar/feature/profile/widgets/change_pass.dart';
 import 'package:dendalar/feature/profile/widgets/edit_profile.dart';
 import 'package:dendalar/feature/profile/widgets/profile_section_button.dart';
+import 'package:dendalar/feature/profile/widgets/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -83,6 +84,7 @@ class ProfilePage extends StatelessWidget {
                                 EditProfile(),
                               if (profileController.changePass.value)
                                 ChangePass(),
+                              if (profileController.setting.value) Settings(),
                             ],
                           );
                         }),
