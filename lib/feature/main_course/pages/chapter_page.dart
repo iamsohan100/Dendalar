@@ -106,6 +106,17 @@ class _ChapterPageState extends State<ChapterPage> {
           if (isTopMostChapter && summaryChapter != null)
             GestureDetector(
               onTap: () {
+                final firstLesson = summaryChapter.lessonList?.firstOrNull;
+                final lastLesson = summaryChapter.lessonList?.lastOrNull;
+                final isUnlocked = firstLesson?.isLocked == false;
+
+                if (!isUnlocked) {
+                  if (firstLesson?.lessonType == 'SENTENCE') {
+                    getSentenceQuestion(firstLesson?.id ?? '');
+                  } else {
+                    getDialogQuestion(lastLesson?.id ?? '');
+                  }
+                }
               },
               child: Image.asset(AppImages.summaryChapter, scale: 4),
             ),
