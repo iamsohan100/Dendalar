@@ -22,29 +22,29 @@ class SentenceQuestionController extends GetxController {
   RxList<QuestionModel>? quesitonList = <QuestionModel>[].obs;
 
   final totalQuestions = 0.obs;
-  final currentQuestion = 1.obs; // 1-based, UI progress দেখানোর জন্য
-  final currentIndex = 0.obs; // 0-based, list থেকে question বের করার জন্য
+  final currentQuestion = 1.obs;
+  final currentIndex = 0.obs;
 
   final FlutterTts flutterTts = FlutterTts();
   final RxBool isPlaying = false.obs;
 
   final wordList = [].obs;
-  final selectedWordList = <int>[].obs; // Stores indices of selected words
+  final selectedWordList = <int>[].obs;
   final Rx<MatchResult> result = MatchResult.none.obs;
   final correctSentence = "".obs;
   final correctWordList = [].obs;
   final RxBool hasAttempted = false.obs;
 
+  Future<void> Function()? onSummaryLessonComplete;
+
   @override
   void onInit() {
     super.onInit();
-    // Reset result whenever selection changes
     ever(selectedWordList, (_) {
       result.value = MatchResult.none;
     });
   }
 
-  /// নির্দিষ্ট index এর question লোড করে wordList/correctSentence সেট করে
   void loadQuestion(int index) {
     if (quesitonList == null || quesitonList!.isEmpty) return;
     if (index < 0 || index >= quesitonList!.length) return;
@@ -55,7 +55,6 @@ class SentenceQuestionController extends GetxController {
     correctSentence.value = question.sentenceInLearningLanguage ?? '';
     correctWordList.value = words;
 
-    // user কে দেখানোর জন্য shuffle করা word list
     wordList.value = List.from(words)..shuffle();
 
     selectedWordList.clear();
@@ -79,13 +78,20 @@ class SentenceQuestionController extends GetxController {
       final currentQuestionId = quesitonList?[currentIndex.value].id;
       if (currentQuestionId == null) return;
 
-      // সঠিক উত্তর দেখানোর জন্য ১ সেকেন্ড অপেক্ষা
       await Future.delayed(const Duration(seconds: 1));
 
-      final isSuccess = await Get.find<ActiveQuestionController>().activeQuestion(
+      final activeQuestionController = Get.find<ActiveQuestionController>();
+      final isSuccess = await activeQuestionController.activeQuestion(
         context: context,
         questionId: currentQuestionId,
       );
+
+      if (!isSuccess) {
+        if (activeQuestionController.lastMessage == "Next question not found!") {
+          Get.offNamed(AppRoutes.levelResetPage);
+        }
+        return;
+      }
 
       if (isSuccess) {
         await goToNextQuestion(context: context);
@@ -103,7 +109,6 @@ class SentenceQuestionController extends GetxController {
     }
   }
 
-  /// পরের question-এ যাওয়ার জন্য
   Future<void> goToNextQuestion({required BuildContext context}) async {
     if (quesitonList == null || quesitonList!.isEmpty) return;
 
@@ -112,7 +117,13 @@ class SentenceQuestionController extends GetxController {
       currentQuestion.value = currentIndex.value + 1;
       loadQuestion(currentIndex.value);
     } else {
-      // সরাসরি QuestionModel এর lessonId থেকে নিচ্ছি
+      if (onSummaryLessonComplete != null) {
+        final callback = onSummaryLessonComplete;
+        onSummaryLessonComplete = null;
+        await callback?.call();
+        return;
+      }
+
       final lessonId = quesitonList?[currentIndex.value].lessonId;
 
       if (lessonId == null) {
@@ -153,15 +164,17 @@ class SentenceQuestionController extends GetxController {
     await flutterTts.setPitch(1.0);
     await flutterTts.setSpeechRate(0.5);
 
-    // For iOS to play through speaker
     await flutterTts.setSharedInstance(true);
-    await flutterTts
-        .setIosAudioCategory(IosTextToSpeechAudioCategory.playback, [
-          IosTextToSpeechAudioCategoryOptions.allowBluetooth,
-          IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
-          IosTextToSpeechAudioCategoryOptions.mixWithOthers,
-          IosTextToSpeechAudioCategoryOptions.defaultToSpeaker,
-        ], IosTextToSpeechAudioMode.defaultMode);
+    await flutterTts.setIosAudioCategory(
+      IosTextToSpeechAudioCategory.playback,
+      [
+        IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+        IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+        IosTextToSpeechAudioCategoryOptions.mixWithOthers,
+        IosTextToSpeechAudioCategoryOptions.defaultToSpeaker,
+      ],
+      IosTextToSpeechAudioMode.defaultMode,
+    );
 
     await flutterTts.speak(text);
   }
@@ -203,7 +216,6 @@ class SentenceQuestionController extends GetxController {
         quesitonList?.addAll(incompleteQuestions);
         totalQuestions.value = quesitonList?.length ?? 1;
 
-        // প্রথম question লোড করে ফেলি এখানেই
         loadQuestion(0);
       } else {
         bottomMessage(msg: response?.message);
@@ -217,6 +229,4 @@ class SentenceQuestionController extends GetxController {
 
     return isSuccess;
   }
-
-
 }

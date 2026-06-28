@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dendalar/core/constants/app_images.dart';
 import 'package:dendalar/core/utils/app_bar/custom_app_bar.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
@@ -7,6 +9,7 @@ import 'package:dendalar/core/utils/widgets/empty_data.dart';
 import 'package:dendalar/feature/main_course/controller/chapter_and_lesson_controller.dart';
 import 'package:dendalar/feature/main_course/controller/dialog_match_controller.dart';
 import 'package:dendalar/feature/main_course/controller/sentence_question_controller.dart';
+import 'package:dendalar/feature/main_course/controller/summary_lesson_controller.dart';
 import 'package:dendalar/feature/main_course/model/chapter_model.dart';
 import 'package:dendalar/feature/main_course/model/lesson_model.dart';
 import 'package:dendalar/feature/main_course/widgets/chapter_divider.dart';
@@ -26,6 +29,7 @@ class _ChapterPageState extends State<ChapterPage> {
   final chapterAndLessonController = Get.find<ChapterAndLessonController>();
   final sentenceQuestionController = Get.find<SentenceQuestionController>();
   final dialogMatchController = Get.find<DialogMatchController>();
+  final summaryLessonController = Get.find<SummaryLessonController>();
 
   @override
   Widget build(BuildContext context) {
@@ -106,17 +110,10 @@ class _ChapterPageState extends State<ChapterPage> {
           if (isTopMostChapter && summaryChapter != null)
             GestureDetector(
               onTap: () {
-                final firstLesson = summaryChapter.lessonList?.firstOrNull;
-                final lastLesson = summaryChapter.lessonList?.lastOrNull;
-                final isUnlocked = firstLesson?.isLocked == false;
-
-                if (!isUnlocked) {
-                  if (firstLesson?.lessonType == 'SENTENCE') {
-                    getSentenceQuestion(firstLesson?.id ?? '');
-                  } else {
-                    getDialogQuestion(lastLesson?.id ?? '');
-                  }
-                }
+                summaryLessonController.startSummaryFlow(
+                  context: context,
+                  lessonList: summaryChapter.lessonList ?? [],
+                );
               },
               child: Image.asset(AppImages.summaryChapter, scale: 4),
             ),
@@ -194,6 +191,8 @@ class _ChapterPageState extends State<ChapterPage> {
   }
 
   Future<void> getSentenceQuestion(String lessonId) async {
+    log("lessongId :$lessonId");
+
     final response = await sentenceQuestionController.getSentenceQuestion(
       context: context,
       lessonId: lessonId,
@@ -204,6 +203,7 @@ class _ChapterPageState extends State<ChapterPage> {
   }
 
   Future<void> getDialogQuestion(String lessonId) async {
+    log("lessongId :$lessonId");
     final response = await dialogMatchController.getDialogQuestion(
       context: context,
       lessonId: lessonId,

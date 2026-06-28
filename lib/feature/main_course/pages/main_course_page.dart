@@ -21,7 +21,7 @@ class MainCoursePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = Screen.screenHeight(context);
     double width = Screen.screenWidth(context);
-    // double scaleFactor = width / Screen.designWidth;
+    double scaleFactor = width / Screen.designWidth;
     final mainCourseController = Get.find<MainCourseController>();
     return Obx(() {
       final data = mainCourseController.levelModel.value.data;
@@ -36,28 +36,37 @@ class MainCoursePage extends StatelessWidget {
           children: [
             Obx(() {
               final currentLevel = mainCourseController.currentLevel.value;
-
+              final isLocked = data?[currentLevel].isLocked == true;
+              final isCompleted = data?[currentLevel].isCompleted == true;
               return PrimaryButton(
                 onTap: () => startLevel(
                   context: context,
                   id: data?[currentLevel].id,
                   isLocked: data?[currentLevel].isLocked,
                 ),
-                title: 'START LEVEL ${data?[currentLevel].name}',
-                backgroundColor: data?[currentLevel].isLocked == true
+                title: isCompleted
+                    ? 'Completed LEVEL ${data?[currentLevel].name}'
+                    : 'START LEVEL ${data?[currentLevel].name}',
+                backgroundColor: (isLocked || isCompleted)
                     ? AppColors.primaryColor.withValues(alpha: 0.5)
                     : null,
-                shadowColor: data?[currentLevel].isLocked == true
+                shadowColor: (isLocked || isCompleted)
                     ? AppColors.primaryColor.withValues(alpha: 0.5)
                     : null,
-                borderColor: data?[currentLevel].isLocked == true
+                borderColor: (isLocked || isCompleted)
                     ? AppColors.primaryColor.withValues(alpha: 0.5)
                     : null,
-                icon: data?[currentLevel].isLocked == true
+                icon: isLocked
                     ? Image.asset(
                         AppIcons.pass,
                         scale: 4,
                         color: AppColors.white,
+                      )
+                    : isCompleted
+                    ? Icon(
+                        Icons.check_circle_outline,
+                        color: AppColors.white,
+                        size: scaleFactor * 24,
                       )
                     : null,
               );

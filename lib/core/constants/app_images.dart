@@ -31,5 +31,6 @@ class AppImages {
   static const String leftDivider = '$basePath/left_divider.png';
   static const String bookChapter = '$basePath/book_chapter.png';
   static const String msgChapter = '$basePath/msg_chapter.png';
+  static const String levelComplete = '$basePath/level_complete.png';
 
 }

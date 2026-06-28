@@ -6,7 +6,8 @@ import 'package:dendalar/feature/forget/pages/verify_email_page.dart';
 import 'package:dendalar/feature/main_course/pages/chapter_page.dart';
 import 'package:dendalar/feature/main_course/pages/dialog_match_page.dart';
 import 'package:dendalar/feature/main_course/pages/lesson_congratulation_page.dart';
-import 'package:dendalar/feature/main_course/pages/match_congratulation_page.dart';
+import 'package:dendalar/feature/main_course/pages/level_congratulation_page.dart';
+import 'package:dendalar/feature/main_course/pages/level_reset_page.dart';
 import 'package:dendalar/feature/main_course/pages/sentence_match_page.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_1.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_2.dart';
@@ -136,11 +137,6 @@ class AppPages {
       transition: Transition.fadeIn,
     ),
       GetPage(
-      name: AppRoutes.matchCongratulationPage,
-      page: () => const MatchCongratulationPage(),
-      transition: Transition.fadeIn,
-    ),
-      GetPage(
       name: AppRoutes.verifyAccountPage,
       page: () => const VerifyAccountPage(),
       transition: Transition.fadeIn,
@@ -148,6 +144,16 @@ class AppPages {
       GetPage(
       name: AppRoutes.lessonCongratulationPage,
       page: () => const LessonCongratulationPage(),
+      transition: Transition.fadeIn,
+    ),
+      GetPage(
+      name: AppRoutes.levelCongratulationPage,
+      page: () => const LevelCongratulationPage(),
+      transition: Transition.fadeIn,
+    ),
+      GetPage(
+      name: AppRoutes.levelResetPage,
+      page: () => const LevelResetPage(),
       transition: Transition.fadeIn,
     ),
   ];
