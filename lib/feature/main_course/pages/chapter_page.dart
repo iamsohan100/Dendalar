@@ -26,6 +26,7 @@ class _ChapterPageState extends State<ChapterPage> {
   final chapterAndLessonController = Get.find<ChapterAndLessonController>();
   final sentenceQuestionController = Get.find<SentenceQuestionController>();
   final dialogMatchController = Get.find<DialogMatchController>();
+
   @override
   Widget build(BuildContext context) {
     double width = Screen.screenWidth(context);
@@ -40,13 +41,17 @@ class _ChapterPageState extends State<ChapterPage> {
               child: SingleChildScrollView(
                 reverse: true,
                 child: Obx(() {
+                  final summaryChapter =
+                      chapterAndLessonController.summaryChapter.value;
+
                   final chapterList = chapterAndLessonController
                       .chapterModel
                       .value
                       .chapterList
                       ?.reversed;
 
-                  if (chapterList == null || chapterList.isEmpty) {
+                  if ((chapterList == null || chapterList.isEmpty) &&
+                      summaryChapter == null) {
                     return const EmptyData(
                       bottomMargin: 0.4,
                       title: 'Nothing to explore yet!',
@@ -61,11 +66,13 @@ class _ChapterPageState extends State<ChapterPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Sh(h: 0.01),
-                      ..._buildChapters(
-                        context: context,
-                        chapterList: chapterList.toList(),
-                        scaleFactor: scaleFactor,
-                      ),
+                      if (chapterList != null)
+                        ..._buildChapters(
+                          context: context,
+                          chapterList: chapterList.toList(),
+                          scaleFactor: scaleFactor,
+                          summaryChapter: summaryChapter,
+                        ),
                     ],
                   );
                 }),
@@ -81,18 +88,30 @@ class _ChapterPageState extends State<ChapterPage> {
     required BuildContext context,
     required List<ChapterData> chapterList,
     required double scaleFactor,
+    ChapterData? summaryChapter,
   }) {
     return List.generate(chapterList.length, (i) {
       final lessonList = chapterList[i].lessonList?.reversed ?? [];
+
+      // chapterList already reversed - i == 0 mane UI te sobar upore dekhano chapter
+      final isTopMostChapter = i == 0;
 
       return Column(
         children: [
           const Sh(h: 0.015),
           ChapterDivider(name: chapterList[i].name ?? ''),
           const Sh(h: 0.015),
+
+          // summary image, lesson er thik upore, kono gap/margin chara
+          if (isTopMostChapter && summaryChapter != null)
+            GestureDetector(
+              onTap: () {
+              },
+              child: Image.asset(AppImages.summaryChapter, scale: 4),
+            ),
+
           ..._buildLessons(
             context: context,
-            isFirstChapter: i == 0,
             lessonList: lessonList.toList(),
             scaleFactor: scaleFactor,
           ),
@@ -103,17 +122,14 @@ class _ChapterPageState extends State<ChapterPage> {
 
   List<Widget> _buildLessons({
     required BuildContext context,
-    required bool isFirstChapter,
     required List<LessonModel> lessonList,
     required double scaleFactor,
   }) {
     return List.generate(lessonList.length, (j) {
       final lesson = lessonList[j];
-      final isFirstLesson = isFirstChapter && j == 0;
 
       return Column(
         children: [
-          if (isFirstLesson) Image.asset(AppImages.summaryChapter, scale: 4),
           _buildLessonItem(
             context: context,
             lesson: lesson,

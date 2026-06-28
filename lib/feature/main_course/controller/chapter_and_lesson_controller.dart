@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'dart:developer';
-
 import 'package:dendalar/core/network/api_caller.dart';
 import 'package:dendalar/core/network/api_urls.dart';
 import 'package:dendalar/core/utils/loading/main_loading.dart';
@@ -13,6 +11,8 @@ import 'package:get/get.dart';
 class ChapterAndLessonController extends GetxController {
   Rx<ChapterModel> chapterModel = ChapterModel().obs;
 
+  Rx<ChapterData?> summaryChapter = Rx<ChapterData?>(null);
+
   Future<bool> getChapter({
     required BuildContext context,
     required String id,
@@ -21,12 +21,22 @@ class ChapterAndLessonController extends GetxController {
     try {
       mainLoading(context);
       final response = await ApiCaller.getRequest(url: ApiUrls.getChapter(id));
-
       Navigator.pop(context);
       log("${response?.responseData.toString()}");
       if (response?.statusCode == 200 && response?.isSuccess == true) {
-        chapterModel.value = ChapterModel.fromJson(response?.responseData);
-        
+        final model = ChapterModel.fromJson(response?.responseData);
+
+        final fullList = model.chapterList ?? [];
+        final summary = fullList.firstWhereOrNull(
+          (c) => (c.name?.trim().toLowerCase() == 'summary'),
+        );
+
+        if (summary != null) {
+          fullList.removeWhere((c) => c.id == summary.id);
+        }
+
+        summaryChapter.value = summary;
+        chapterModel.value = model;
       } else {
         bottomMessage(msg: response?.message);
         isSuccess = false;
@@ -36,8 +46,6 @@ class ChapterAndLessonController extends GetxController {
       log(e.toString());
       isSuccess = false;
     }
-
     return isSuccess;
   }
-
 }
