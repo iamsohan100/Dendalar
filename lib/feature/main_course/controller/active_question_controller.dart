@@ -26,9 +26,9 @@ class ActiveQuestionController extends GetxController {
       lastMessage = response?.message;
       if (response?.statusCode == 200 && response?.isSuccess == true) {
       } else {
-        // if (response?.message != 'Next question not found!') {
-        bottomMessage(msg: response?.message);
-        // }
+        if (response?.message != 'Next question not found!') {
+          bottomMessage(msg: response?.message);
+        }
         isSuccess = false;
       }
     } catch (e) {

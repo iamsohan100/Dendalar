@@ -77,9 +77,7 @@ class SummaryLessonController extends GetxController {
     if (_currentStep == _SummaryStep.sentence) {
       _sentenceDone = true;
 
-      // dialog lesson আছে কিনা শুধু এটুকু চেক করো
-      // isLocked চেক করো না — sentence শেষে backend unlock করে দেয়
-      if (_dialogLesson != null && _dialogLesson?.isCompleted == false) {
+      if (_dialogLesson != null && !_dialogDone) {
         await _startDialog(context);
       } else {
         await Get.find<ActiveLevelController>().activeLevel(context: context);
@@ -89,7 +87,7 @@ class SummaryLessonController extends GetxController {
     } else if (_currentStep == _SummaryStep.dialog) {
       _dialogDone = true;
 
-      if (_sentenceLesson != null && _sentenceLesson?.isCompleted == false) {
+      if (_sentenceLesson != null && !_sentenceDone) {
         await _startSentence(context);
       } else {
         await Get.find<ActiveLevelController>().activeLevel(context: context);

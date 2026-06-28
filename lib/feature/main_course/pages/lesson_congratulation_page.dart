@@ -21,7 +21,7 @@ class LessonCongratulationPage extends StatelessWidget {
         children: [
           PrimaryButton(
             onTap: () => Get.offAllNamed(AppRoutes.dashboardPage),
-            title: 'Go to Home',
+            title: 'Start Next Lesson',
           ),
           Sh(h: 0.01),
         ],
