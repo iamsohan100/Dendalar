@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class ResetLevelController extends GetxController {
+  final resetLevelController = TextEditingController();
   Future<bool> resetLevel({required BuildContext context}) async {
     bool isSuccess = true;
     try {
@@ -34,5 +35,11 @@ class ResetLevelController extends GetxController {
     }
 
     return isSuccess;
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    resetLevelController.dispose();
   }
 }

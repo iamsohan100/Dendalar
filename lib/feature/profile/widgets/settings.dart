@@ -2,6 +2,7 @@ import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/feature/profile/controller/privacy_about_controller.dart';
+import 'package:dendalar/feature/profile/widgets/reset_level_dialog.dart';
 import 'package:dendalar/feature/profile/widgets/setting_button.dart';
 import 'package:dendalar/routes/app_routes.dart';
 
@@ -22,7 +23,9 @@ class Settings extends StatelessWidget {
       children: [
         Sh(h: 0.015),
         SettingButton(
-          onTap: () {},
+          onTap: () {
+            resetLevelDialog(context: context);
+          },
           icon: Icons.arrow_forward_ios,
           image: AppIcons.resetLevel,
           title: 'Reset Level',

@@ -18,6 +18,7 @@ class PrimaryButton extends StatelessWidget {
   final double? offsetY;
   final bool? isManjari;
   final double? fontSize;
+  final FontWeight? fontWeight;
   const PrimaryButton({
     super.key,
     this.onTap,
@@ -33,7 +34,7 @@ class PrimaryButton extends StatelessWidget {
     this.offsetX,
     this.offsetY,
     this.isManjari,
-    this.fontSize,
+    this.fontSize, this.fontWeight,
   });
 
   @override
@@ -73,7 +74,7 @@ class PrimaryButton extends StatelessWidget {
                       textAlign: TextAlign.center,
                       textOverflow: TextOverflow.clip,
                       fontSize: fontSize ?? 20,
-                      fontWeight: FontWeight.w400,
+                      fontWeight:fontWeight?? FontWeight.w400,
                       color: fontColor ?? AppColors.white,
                       isKoulen: isManjari == null ? true : null,
                       isManjari: isManjari,
@@ -85,7 +86,7 @@ class PrimaryButton extends StatelessWidget {
                 textAlign: TextAlign.center,
                 textOverflow: TextOverflow.clip,
                 fontSize: fontSize ?? 20,
-                fontWeight: FontWeight.w400,
+                fontWeight:fontWeight?? FontWeight.w400,
                 color: fontColor ?? AppColors.white,
                 isKoulen: isManjari == null ? true : null,
                 isManjari: isManjari,
