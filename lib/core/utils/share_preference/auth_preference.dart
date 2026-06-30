@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthPreference {
@@ -20,6 +22,7 @@ class AuthPreference {
 
   Future<void> initializeToken() async {
     userToken = await _getToken();
+    log("userToken: $userToken");
   }
 
   Future<void> clearAuthData() async {

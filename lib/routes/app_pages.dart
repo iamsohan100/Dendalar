@@ -1,11 +1,13 @@
 import 'package:dendalar/feature/dashboard/pages/dashboard_page.dart';
-import 'package:dendalar/feature/login/pages/forget_password_page.dart';
+import 'package:dendalar/feature/forget/pages/forget_password_page.dart';
 import 'package:dendalar/feature/login/pages/login_page.dart';
-import 'package:dendalar/feature/login/pages/set_new_pass_page.dart';
-import 'package:dendalar/feature/login/pages/verify_email_page.dart';
+import 'package:dendalar/feature/forget/pages/set_new_pass_page.dart';
+import 'package:dendalar/feature/forget/pages/verify_email_page.dart';
 import 'package:dendalar/feature/main_course/pages/chapter_page.dart';
 import 'package:dendalar/feature/main_course/pages/dialog_match_page.dart';
-import 'package:dendalar/feature/main_course/pages/match_congratulation_page.dart';
+import 'package:dendalar/feature/main_course/pages/lesson_congratulation_page.dart';
+import 'package:dendalar/feature/main_course/pages/level_congratulation_page.dart';
+import 'package:dendalar/feature/main_course/pages/level_reset_page.dart';
 import 'package:dendalar/feature/main_course/pages/sentence_match_page.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_1.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_2.dart';
@@ -13,12 +15,15 @@ import 'package:dendalar/feature/onboarding/pages/onboarding_page_3.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_4.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_5.dart';
 import 'package:dendalar/feature/onboarding/pages/onboarding_page_6.dart';
+import 'package:dendalar/feature/profile/pages/about_us_page.dart';
+import 'package:dendalar/feature/profile/pages/privacy_policy_page.dart';
 import 'package:dendalar/feature/registration/pages/age_page.dart';
 import 'package:dendalar/feature/registration/pages/complete_profile_page.dart';
 import 'package:dendalar/feature/registration/pages/congratulation_page.dart';
 import 'package:dendalar/feature/registration/pages/create_profile_page.dart';
 import 'package:dendalar/feature/registration/pages/email_page.dart';
 import 'package:dendalar/feature/registration/pages/name_page.dart';
+import 'package:dendalar/feature/registration/pages/verify_account_page.dart';
 import 'package:dendalar/feature/splash/pages/splash_page.dart';
 import 'package:dendalar/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -50,12 +55,12 @@ class AppPages {
       page: () => const OnboardingPage3(),
       transition: Transition.fadeIn,
     ),
-     GetPage(
+    GetPage(
       name: AppRoutes.onboardingPage4,
       page: () => const OnboardingPage4(),
       transition: Transition.fadeIn,
     ),
-     GetPage(
+    GetPage(
       name: AppRoutes.onboardingPage5,
       page: () => const OnboardingPage5(),
       transition: Transition.fadeIn,
@@ -100,42 +105,67 @@ class AppPages {
       page: () => const LoginPage(),
       transition: Transition.fadeIn,
     ),
-    
+
     GetPage(
       name: AppRoutes.forgetPasswordPage,
       page: () => const ForgetPasswordPage(),
       transition: Transition.fadeIn,
     ),
 
-     GetPage(
+    GetPage(
       name: AppRoutes.verifyEmailPage,
       page: () => const VerifyEmailPage(),
       transition: Transition.fadeIn,
     ),
 
-      GetPage(
+    GetPage(
       name: AppRoutes.setNewPassPage,
       page: () => const SetNewPassPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.chapterPage,
       page: () => const ChapterPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.sentenceMatchPage,
       page: () => const SentenceMatchPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.dialogMatchPage,
       page: () => const DialogMatchPage(),
       transition: Transition.fadeIn,
     ),
-      GetPage(
-      name: AppRoutes.matchCongratulationPage,
-      page: () => const MatchCongratulationPage(),
+    GetPage(
+      name: AppRoutes.verifyAccountPage,
+      page: () => const VerifyAccountPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.lessonCongratulationPage,
+      page: () => const LessonCongratulationPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.levelCongratulationPage,
+      page: () => const LevelCongratulationPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.levelResetPage,
+      page: () => const LevelResetPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.aboutUsPage,
+      page: () => const AboutUsPage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.privacyPolicyPage,
+      page: () => const PrivacyPolicyPage(),
       transition: Transition.fadeIn,
     ),
   ];

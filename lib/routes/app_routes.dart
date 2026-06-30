@@ -20,5 +20,10 @@ class AppRoutes {
   static const chapterPage = '/chapterPage';
   static const sentenceMatchPage = '/sentenceMatchPage';
   static const dialogMatchPage = '/dialogMatchPage';
-  static const matchCongratulationPage = '/matchCongratulationPage';
+  static const verifyAccountPage = '/verifyAccountPage';
+  static const lessonCongratulationPage = '/lessonCongratulationPage';
+  static const levelCongratulationPage = '/levelCongratulationPage';
+  static const levelResetPage = '/levelResetPage';
+  static const aboutUsPage = '/aboutUsPage';
+  static const privacyPolicyPage = '/privacyPolicyPage';
 }

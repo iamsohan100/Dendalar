@@ -2,7 +2,7 @@ import 'package:dendalar/core/constants/app_colors.dart';
 import 'package:dendalar/core/constants/app_icons.dart';
 import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
-import 'package:dendalar/feature/main_course/controller/sentence_match_controller.dart';
+import 'package:dendalar/feature/main_course/controller/sentence_question_controller.dart';
 import 'package:dendalar/feature/main_course/widgets/hind_dialog.dart';
 import 'package:dendalar/feature/onboarding/widgets/onboarding_buttons.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class CheckButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sentenceMatchController = Get.find<SentenceMatchController>();
+    final sentenceQuestionController = Get.find<SentenceQuestionController>();
 
     return OnboardingButtons(
       children: [
@@ -24,50 +24,52 @@ class CheckButton extends StatelessWidget {
               child: Obx(() {
                 return PrimaryButton(
                   onTap: () {
-                    sentenceMatchController.checkAnswer();
+                    sentenceQuestionController.checkAnswer(context: context);
                   },
-                  title: sentenceMatchController.result.value ==
+                  title:
+                      sentenceQuestionController.result.value ==
                           MatchResult.correct
                       ? 'CORRECT'
-                      : sentenceMatchController.result.value ==
-                              MatchResult.wrong
-                          ? 'WRONG'
-                          : sentenceMatchController.hasAttempted.value
-                              ? 'CHECK AGAIN'
-                              : 'CHECK',
+                      : sentenceQuestionController.result.value ==
+                            MatchResult.wrong
+                      ? 'WRONG'
+                      : sentenceQuestionController.hasAttempted.value
+                      ? 'CHECK AGAIN'
+                      : 'CHECK',
                   backgroundColor:
-                      sentenceMatchController.result.value ==
+                      sentenceQuestionController.result.value ==
                           MatchResult.correct
                       ? AppColors.primaryColor
-                      : sentenceMatchController.result.value ==
+                      : sentenceQuestionController.result.value ==
                             MatchResult.wrong
                       ? AppColors.scarletRose
                       : AppColors.white,
                   shadowColor:
-                      sentenceMatchController.result.value ==
+                      sentenceQuestionController.result.value ==
                           MatchResult.correct
                       ? AppColors.zuccini
-                      : sentenceMatchController.result.value ==
+                      : sentenceQuestionController.result.value ==
                             MatchResult.wrong
                       ? AppColors.winterRed
                       : AppColors.chalice,
                   borderColor:
-                      sentenceMatchController.result.value ==
+                      sentenceQuestionController.result.value ==
                           MatchResult.correct
                       ? AppColors.zuccini
-                      : sentenceMatchController.result.value ==
+                      : sentenceQuestionController.result.value ==
                             MatchResult.wrong
                       ? AppColors.winterRed
                       : AppColors.chalice,
                   fontColor:
-                      sentenceMatchController.result.value == MatchResult.none
+                      sentenceQuestionController.result.value ==
+                          MatchResult.none
                       ? AppColors.blackout
                       : AppColors.white,
                   icon:
-                      sentenceMatchController.result.value ==
+                      sentenceQuestionController.result.value ==
                           MatchResult.correct
                       ? Image.asset(AppIcons.congrats, scale: 4)
-                      : sentenceMatchController.result.value ==
+                      : sentenceQuestionController.result.value ==
                             MatchResult.wrong
                       ? Image.asset(AppIcons.wrong, scale: 4)
                       : null,

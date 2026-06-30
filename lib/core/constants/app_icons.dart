@@ -24,4 +24,7 @@ class AppIcons {
   static const String hind = '$basePath/hind.png';
   static const String congrats = '$basePath/congrats.png';
   static const String wrong = '$basePath/wrong.png';
+  static const String resetLevel = '$basePath/reset_level.png';
+  static const String privacyPolicy = '$basePath/privacy_policy.png';
+  static const String aboutUs = '$basePath/about_us.png';
 }

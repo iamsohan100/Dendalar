@@ -19,13 +19,18 @@ class AppImages {
   static const String setPass = '$basePath/set_pass.png';
   static const String level = '$basePath/level.png';
   static const String levelLocked = '$basePath/level_locked.png';
-  static const String completedChapter = '$basePath/completed_chapter.png';
-  static const String bookChapter = '$basePath/book_chapter.png';
-  static const String msgChapter = '$basePath/msg_chapter.png';
   static const String lockChapter = '$basePath/lock_chapter.png';
   static const String alphabet = '$basePath/alphabet.png';
   static const String summaryChapter = '$basePath/summary_chapter.png';
   static const String alphabetPlus = '$basePath/alphabet++.png';
   static const String chapterCount = '$basePath/chapter_count.png';
   static const String matchCongratulation = '$basePath/match_congratulation.png';
+  static const String chapter = '$basePath/chapter.png';
+  static const String completedChapter = '$basePath/completed_chapter.png';
+  static const String rightDivider = '$basePath/right_divider.png';
+  static const String leftDivider = '$basePath/left_divider.png';
+  static const String bookChapter = '$basePath/book_chapter.png';
+  static const String msgChapter = '$basePath/msg_chapter.png';
+  static const String levelComplete = '$basePath/level_complete.png';
+
 }

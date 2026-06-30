@@ -1,8 +1,10 @@
 import 'package:dendalar/core/constants/app_colors.dart';
+import 'package:dendalar/core/utils/helper/validation_helper.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomFormField extends StatefulWidget {
@@ -25,8 +27,10 @@ class CustomFormField extends StatefulWidget {
   final bool? isMail;
   final bool? isRequired;
   final Color? titleColor;
-
+  final bool? isNumber;
+  final Color? fontColor;
   final ValueChanged<String>? onChange;
+  final bool? isPasswordValidation;
   const CustomFormField({
     super.key,
     this.controller,
@@ -49,6 +53,9 @@ class CustomFormField extends StatefulWidget {
     this.isRequired,
     this.horPadding,
     this.titleColor,
+    this.isNumber,
+    this.fontColor,
+    this.isPasswordValidation,
   });
 
   @override
@@ -77,10 +84,15 @@ class _CustomFormField extends State<CustomFormField> {
         ],
 
         TextFormField(
-          keyboardType: widget.isPhone == true
+          keyboardType: widget.isNumber == true
+              ? TextInputType.number
+              : widget.isPhone == true
               ? TextInputType.phone
               : widget.isMail == true
               ? TextInputType.emailAddress
+              : null,
+          inputFormatters: widget.isNumber == true
+              ? [FilteringTextInputFormatter.digitsOnly]
               : null,
           initialValue: widget.initialValue,
           cursorColor: AppColors.primaryColor,
@@ -92,12 +104,14 @@ class _CustomFormField extends State<CustomFormField> {
           maxLines: widget.maxLine ?? 1,
           validator: widget.isValidator == false
               ? null
+              : widget.isPasswordValidation == true
+              ? ValidationHelper.validatePassword
               : widget.isMail == true
               ? (value) {
                   if (value?.trim().isEmpty ?? true) {
-                    return '${widget.title} can not be empty';
+                    return 'e-mail can not be empty';
                   } else if (RegExp(
-                    r'^[a-z0-9._%+-]+@[a-z0-9.-]+\.(com|net|org)$',
+                    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
                   ).hasMatch(value!)) {
                     return null;
                   }
@@ -105,14 +119,14 @@ class _CustomFormField extends State<CustomFormField> {
                 }
               : (value) {
                   if (value!.isEmpty) {
-                    return '${widget.title} can not be empty';
+                    return '${widget.hintText} can not be empty';
                   }
                   return null;
                 },
           style: GoogleFonts.manjari(
             fontSize: scaleFactor * 14,
             fontWeight: FontWeight.w400,
-            color: AppColors.blackout,
+            color: widget.fontColor ?? AppColors.blackout,
           ),
 
           obscureText: widget.isPassword && obSecure,

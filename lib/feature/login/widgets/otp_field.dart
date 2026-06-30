@@ -1,12 +1,15 @@
 import 'package:dendalar/core/constants/app_colors.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
+import 'package:dendalar/feature/forget/controller/forget_controller.dart';
+import 'package:dendalar/feature/registration/controller/registration_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpField extends StatefulWidget {
-  const OtpField({super.key});
-
+  const OtpField({super.key, this.isAccountVerify});
+  final bool? isAccountVerify;
   @override
   State<OtpField> createState() => _OtpFieldState();
 }
@@ -63,7 +66,12 @@ class _OtpFieldState extends State<OtpField> {
           animationDuration: const Duration(milliseconds: 300),
           enableActiveFill: true,
           keyboardType: TextInputType.number,
-          onCompleted: (_) {},
+
+          onCompleted: (value) {
+            widget.isAccountVerify == true
+                ? Get.find<RegistrationController>().otp.value = value
+                : Get.find<ForgetController>().otp.value = value;
+          },
         ),
       ),
     );

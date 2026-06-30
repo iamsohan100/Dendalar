@@ -5,7 +5,7 @@ import 'package:dendalar/core/utils/buttons/primary_button.dart';
 import 'package:dendalar/core/utils/responsive/screen.dart';
 import 'package:dendalar/core/utils/responsive/sized_box.dart';
 import 'package:dendalar/core/utils/text/custom_text.dart';
-import 'package:dendalar/feature/main_course/controller/sentence_match_controller.dart';
+import 'package:dendalar/feature/main_course/controller/sentence_question_controller.dart';
 import 'package:dendalar/feature/main_course/widgets/word_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,13 @@ void hindDialog({required BuildContext context}) {
   final height = Screen.screenHeight(context);
   final width = Screen.screenWidth(context);
   final scaleFactor = width / Screen.designWidth;
-  final sentenceMatchController = Get.find<SentenceMatchController>();
+  final sentenceQuestionController = Get.find<SentenceQuestionController>();
+
+  // current question বের করে আনছি
+  final currentQuestion = sentenceQuestionController
+      .quesitonList?[sentenceQuestionController.currentIndex.value];
+
+  final hintWordList = (currentQuestion?.hint ?? '').split(" ");
 
   showDialog(
     context: context,
@@ -51,18 +57,13 @@ void hindDialog({required BuildContext context}) {
                 ],
               ),
               Sh(h: 0.02),
-
               Wrap(
                 spacing: width * 0.02,
                 runSpacing: height * 0.02,
                 children: [
-                  for (
-                    int i = 0;
-                    i < sentenceMatchController.correctWordList.length;
-                    i++
-                  )
+                  for (int i = 0; i < hintWordList.length; i++)
                     WordCard(
-                      title: sentenceMatchController.correctWordList[i],
+                      title: hintWordList[i],
                       isSelected: true,
                     ),
                 ],
@@ -77,7 +78,7 @@ void hindDialog({required BuildContext context}) {
                 ),
                 padding: .all(scaleFactor * 10),
                 child: CustomText(
-                  text: 'This is my mother',
+                  text: currentQuestion?.sentenceInEnglish ?? '',
                   color: AppColors.primaryColor,
                   fontSize: 14,
                   fontWeight: .w500,

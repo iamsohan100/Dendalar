@@ -3,11 +3,12 @@ import 'package:dendalar/core/constants/init_dependency_binding.dart';
 import 'package:dendalar/routes/app_pages.dart';
 import 'package:dendalar/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await dotenv.load(fileName: "dendalar.env");
   runApp(const Dendalar());
 }
 
